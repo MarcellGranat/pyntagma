@@ -1,0 +1,1 @@
+{"config":{"lang":["en"],"separator":"[\\s\\-]+","pipeline":["stopWordFilter"]},"docs":[{"location":"","title":"Pyntagma","text":"<p>Welcome to the documentation for the <code>pyntagma</code> package!</p>"},{"location":"#features","title":"Features","text":"<ul> <li>Structured document parsing</li> <li>Abstract syntax trees</li> <li>Fast, elegant API</li> </ul>"}]}
