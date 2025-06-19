@@ -4,6 +4,10 @@
 [![Python Version](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
+<div align="center">
+    <img src="docs/banner.png" alt="Pyntagma Banner">
+</div>
+
 Pyntagma is a Python library for creating and managing complex data structures with ease. Its name is derived from the Greek word 'Syntagma', meaning 'composition', symbolizing that this package fits for semi-structured documents.
 
 ## Features
