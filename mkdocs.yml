@@ -1,0 +1,13 @@
+site_name: Pyntagma
+site_url: https://marcellgranat.github.io/pyntagma/
+repo_url: https://github.com/marcellgranat/pyntagma
+repo_name: pyntagma
+theme:
+  logo: logo.min.svg
+  name: material
+  palette:
+    scheme: default
+    primary: brown
+    accent: deep orange
+nav:
+  - Home: index.md

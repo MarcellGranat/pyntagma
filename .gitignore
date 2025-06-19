@@ -4,3 +4,4 @@
 *CLAUDE*
 *.vscode
 *.venv
+site/*
