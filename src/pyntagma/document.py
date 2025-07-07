@@ -1,5 +1,6 @@
 from functools import cache, cached_property
 from pathlib import Path
+from typing import Iterable
 
 from pydantic import BaseModel
 
@@ -78,6 +79,34 @@ class Page(BaseModel):
         with silent_pdfplumber(self.path) as pdf:
             return pdf.pages[self.file_page_number].width
         
+
+    @property
+    def im(self):
+        """
+        Get the image of the page.
+        """
+        with silent_pdfplumber(self.path) as pdf:
+            return pdf.pages[self.file_page_number].to_image()
+        
+    def plot_on(self, items: Iterable, colors: str | list[str] | None, **kwargs):
+        """
+        Plot the page on the given items.
+        """
+        if not colors:
+            colors = "red"
+
+        im = self.im
+
+        for item, color in zip(items, colors):
+            if isinstance(item, Position):
+                position = item
+            else:
+                position = item.position
+            im.draw_rect(position.bbox, stroke=color, **kwargs)
+
+        return im
+        
+
     def __hash__(self):
         return hash((self.path.absolute, self.file_page_number, self.page_number))
     
@@ -140,6 +169,12 @@ class Word(BaseModel):
         Find the line that contains the word.
         """
         return line_of_word(self)
+
+    def plot_on_page(self, color: str = "red") -> None:
+        """
+        Plot this word on the page.
+        """
+        return self.position.plot_on_page(color=color)
     
     def __hash__(self) -> int:
         return hash((self.page.path, self.page.page_number, self.text, self.x0, self.x1, self.top, self.bottom))
@@ -168,6 +203,12 @@ class Line(BaseModel):
         Extract words from the line.
         """
         return words_of_line(self)
+    
+    def plot_on_page(self, color: str = "red") -> None:
+        """
+        Plot this line on the page.
+        """
+        self.position.plot_on_page(color=color)
     
     def __hash__(self) -> int:
         return hash((self.page.path, self.page.page_number, self.text, self.x0, self.x1, self.top, self.bottom))

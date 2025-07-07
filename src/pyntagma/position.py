@@ -1,5 +1,7 @@
-from pydantic import BaseModel
 from typing import Any, Iterable
+
+from pydantic import BaseModel
+
 from .pdf_reader import Crop
 
 
@@ -13,12 +15,12 @@ class VerticalCoordinate(BaseModel):
 
     def __hash__(self):
         return hash((self.page_number, self.value))
-    
+
     @property
     def page_number(self) -> int:
         return self.page.page_number
-    
-    def shift(self, delta: float) -> 'VerticalCoordinate':
+
+    def shift(self, delta: float) -> "VerticalCoordinate":
         """
         Shift the vertical coordinate by a given delta.
         """
@@ -27,12 +29,14 @@ class VerticalCoordinate(BaseModel):
         while True:
             if delta > 0:
                 if value + delta <= self.page.height:
-                    value = value + delta 
+                    value = value + delta
                     return VerticalCoordinate(page=page, value=value)
                 else:
-                    delta -= (self.page.height - self.value)
+                    delta -= self.page.height - self.value
 
-                    if page.page_number + 1 ==  len(page.document): # reached the last page
+                    if page.page_number + 1 == len(
+                        page.document
+                    ):  # reached the last page
                         value = page.height
                         return VerticalCoordinate(page=page, value=value)
                     else:
@@ -44,7 +48,7 @@ class VerticalCoordinate(BaseModel):
                     return VerticalCoordinate(page=page, value=value)
                 else:
                     delta += value
-                    if page.page_number == 0: # already on the first page
+                    if page.page_number == 0:  # already on the first page
                         return VerticalCoordinate(page=page, value=0)
                     else:
                         page = page.document.pages[page.page_number - 1]
@@ -52,39 +56,33 @@ class VerticalCoordinate(BaseModel):
             else:
                 return VerticalCoordinate(page=page, value=value)
 
-    
     def __lt__(self, other):
-        return (
-            self.page_number < other.page_number or
-            (self.page_number == other.page_number and self.value < other.value)
+        return self.page_number < other.page_number or (
+            self.page_number == other.page_number and self.value < other.value
         )
-    
+
     def __le__(self, other):
-        return (
-            self.page_number < other.page_number or
-            (self.page_number == other.page_number and self.value <= other.value)
+        return self.page_number < other.page_number or (
+            self.page_number == other.page_number and self.value <= other.value
         )
-    
+
     def __gt__(self, other):
-        return (
-            self.page_number > other.page_number or
-            (self.page_number == other.page_number and self.value > other.value)
+        return self.page_number > other.page_number or (
+            self.page_number == other.page_number and self.value > other.value
         )
-    
+
     def __ge__(self, other):
-        return (
-            self.page_number > other.page_number or
-            (self.page_number == other.page_number and self.value >= other.value)
+        return self.page_number > other.page_number or (
+            self.page_number == other.page_number and self.value >= other.value
         )
-    
+
     def __sub__(self, other):
         if isinstance(other, float) or isinstance(other, int):
             shifted = self.shift(-other)
             return shifted
 
-        self_before: bool = (
-            self.page_number < other.page_number or
-            (self.page_number == other.page_number and self.value < other.value)
+        self_before: bool = self.page_number < other.page_number or (
+            self.page_number == other.page_number and self.value < other.value
         )
 
         if self_before:
@@ -94,25 +92,27 @@ class VerticalCoordinate(BaseModel):
 
         # on the same page
         if before.page_number == after.page_number:
-            difference =  after.value - before.value
+            difference = after.value - before.value
         else:
             before_part = before.page.height - before.value
             after_part = after.value
-            page_diff_part = (after.page.page_number - before.page.page_number - 1) * before.page.height
+            page_diff_part = (
+                after.page.page_number - before.page.page_number - 1
+            ) * before.page.height
             difference = before_part + after_part + page_diff_part
-        
+
         if self_before:
             return -difference
         else:
             return difference
 
-    def __add__(self, other: float | int) -> 'VerticalCoordinate':
+    def __add__(self, other: float | int) -> "VerticalCoordinate":
         """
         Add a float value to the vertical coordinate.
         """
         return self.shift(other)
-    
-    
+
+
 class HorizontalCoordinate(BaseModel):
     page: Any
     value: float
@@ -127,21 +127,20 @@ class HorizontalCoordinate(BaseModel):
 
     def __hash__(self):
         return hash((self.page_number, self.value))
-    
 
     def __lt__(self, other):
         return self.value < other.value
-    
+
     def __le__(self, other):
         return self.value <= other.value
-    
+
     def __gt__(self, other):
         return self.value > other.value
-    
+
     def __ge__(self, other):
         return self.value >= other.value
-    
-    def shift(self, delta: float | int) -> 'HorizontalCoordinate':
+
+    def shift(self, delta: float | int) -> "HorizontalCoordinate":
         if delta > 0:
             if self.value + delta <= self.page.width:
                 return HorizontalCoordinate(page=self.page, value=self.value + delta)
@@ -159,8 +158,8 @@ class HorizontalCoordinate(BaseModel):
         if isinstance(other, float) or isinstance(other, int):
             return self.shift(-other)
         return self.value - other.value
-    
-    def __add__(self, other: float | int) -> 'HorizontalCoordinate':
+
+    def __add__(self, other: float | int) -> "HorizontalCoordinate":
         """
         Add a float value to the horizontal coordinate.
         """
@@ -176,13 +175,13 @@ class VerticalPosition(BaseModel):
 
     def __lt__(self, other):
         return self.bottom < other.top
-    
+
     def __le__(self, other):
         return self.bottom <= other.top
-    
+
     def __gt__(self, other):
         return self.top > other.bottom
-    
+
     def __ge__(self, other):
         return self.top >= other.bottom
 
@@ -195,7 +194,7 @@ class VerticalPosition(BaseModel):
 
         else:
             return 0
-        
+
 
 class HorizontalPosition(BaseModel):
     x0: HorizontalCoordinate
@@ -203,30 +202,29 @@ class HorizontalPosition(BaseModel):
 
     def __hash__(self):
         return hash((self.x0, self.x1))
-    
+
     def __lt__(self, other):
         return self.x0 < other.x1
-    
+
     def __le__(self, other):
         return self.x0 <= other.x1
-    
+
     def __gt__(self, other):
         return self.x1 > other.x0
-    
+
     def __ge__(self, other):
         return self.x1 >= other.x0
-    
+
     def __sub__(self, other):
-        
         if self.x1 < other.x0:
-            return - (self.x1 - other.x0)
+            return -(self.x1 - other.x0)
 
         elif self.x0 > other.x1:
             return self.x0 - self.x1
 
         else:
             return 0
-    
+
 
 class Position(BaseModel):
     x0: HorizontalCoordinate
@@ -239,12 +237,12 @@ class Position(BaseModel):
 
     def __eq__(self, other):
         return (
-            self.x0 == other.x0 and
-            self.x1 == other.x1 and
-            self.top == other.top and
-            self.bottom == other.bottom
+            self.x0 == other.x0
+            and self.x1 == other.x1
+            and self.top == other.top
+            and self.bottom == other.bottom
         )
-    
+
     @property
     def vertical(self) -> VerticalPosition:
         return VerticalPosition(top=self.top, bottom=self.bottom)
@@ -252,7 +250,7 @@ class Position(BaseModel):
     @property
     def horizontal(self) -> HorizontalPosition:
         return HorizontalPosition(x0=self.x0, x1=self.x1)
-    
+
     @property
     def crop(self) -> Crop:
         if self.vertical.top.page_number == self.vertical.bottom.page_number:
@@ -262,39 +260,52 @@ class Position(BaseModel):
                 x0=self.x0.value,
                 x1=self.x1.value,
                 top=self.top.value,
-                bottom=self.bottom.value
+                bottom=self.bottom.value,
             )
         else:
             raise NotImplementedError("Crop not implemented for multiple pages")
-        
+
     @property
     def show(self) -> None:
         """Display the position as a crop."""
         crop = self.crop
-        crop.im.show()
+        crop.im.show
 
-    def contains(self, other: 'Position') -> bool:
+    @property
+    def bbox(self) -> tuple[float, float, float, float]:
+        """
+        Get the bounding box of the position.
+        """
+        return (self.x0.value, self.top.value, self.x1.value, self.bottom.value)
+
+    def plot_on_page(self, color: str = "red") -> None:
+        page = self.vertical.top.page
+        return page.plot_on([self], colors=[color])
+
+    def contains(self, other: "Position") -> bool:
         return (
-            self.x0 <= other.x0 and
-            self.x1 >= other.x1 and
-            self.top <= other.top and
-            self.bottom >= other.bottom
+            self.x0 <= other.x0
+            and self.x1 >= other.x1
+            and self.top <= other.top
+            and self.bottom >= other.bottom
         )
 
     def __str__(self):
         return f"Position: ({self.x0}, {self.x1}, {self.top}, {self.bottom})"
-    
+
 
 def get_position(item: Any) -> Position:
     if isinstance(item, Position):
         return item
-    elif hasattr(item, 'position'):
+    elif hasattr(item, "position"):
         return item.position
     else:
-        raise ValueError(f"Item {item} does not have a position or is not a Position instance.")
-    
+        raise ValueError(
+            f"Item {item} does not have a position or is not a Position instance."
+        )
 
-def position_union(items: Iterable) -> Position:    
+
+def position_union(items: Iterable) -> Position:
     min_x0 = min(get_position(item).horizontal.x0 for item in items)
     max_x1 = max(get_position(item).horizontal.x1 for item in items)
     min_top = min(get_position(item).vertical.top for item in items)
@@ -307,6 +318,7 @@ class PdfAnchor(BaseModel):
     """
     A base class for anchors in a PDF document.
     """
+
     @property
     def position(self) -> Position:
         """
@@ -317,7 +329,7 @@ class PdfAnchor(BaseModel):
     @property
     def page(self):
         return self.position.top.page
-    
+
     @property
     def horizontal(self) -> HorizontalPosition:
         """
@@ -339,18 +351,31 @@ class PdfAnchor(BaseModel):
         """
         return self.position.crop.im.show
 
+    def plot_on_page(self, color: str = "red") -> None:
+        """
+        Plot this anchor on the page.
+        """
+        return self.position.plot_on_page(color=color)
+
     def __hash__(self):
         try:
             self.position
         except NotImplementedError:
             return 0
         return hash(self.position)
-    
+
     def __str__(self):
         return f"PdfAnchor(page: {self.position.top.page_number})"
 
 
-def left_position_join(x: Iterable, y: Iterable, after: bool = True, uniquely: bool = True, keep_empty_x: bool = False, max_distance: int | None = None) -> Iterable[tuple]:
+def left_position_join(
+    x: Iterable,
+    y: Iterable,
+    after: bool = True,
+    uniquely: bool = True,
+    keep_empty_x: bool = False,
+    max_distance: int | None = None,
+) -> Iterable[tuple]:
     """
     Bind two lists together based on their vertical positions.
     """
@@ -361,19 +386,25 @@ def left_position_join(x: Iterable, y: Iterable, after: bool = True, uniquely: b
         for y_item in y:
             if after:
                 if max_distance:
-                    if y_item.position.vertical - x_item.position.vertical > max_distance:
-                        break # laters will be even further away
-                
+                    if (
+                        y_item.position.vertical - x_item.position.vertical
+                        > max_distance
+                    ):
+                        break  # laters will be even further away
+
                 if x_item.position.vertical < y_item.position.vertical:
                     if uniquely:
                         y.remove(y_item)
                     yield (x_item, y_item)
                     break
 
-            else: 
+            else:
                 if max_distance:
-                    if x_item.position.vertical - y_item.position.vertical > max_distance:
-                        break # laters will be even further away
+                    if (
+                        x_item.position.vertical - y_item.position.vertical
+                        > max_distance
+                    ):
+                        break  # laters will be even further away
 
                 if x_item.position.vertical > y_item.position.vertical:
                     if uniquely:
