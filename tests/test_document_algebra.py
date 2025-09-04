@@ -114,3 +114,11 @@ def test_coord_shift():
         .shift(20)
     
     assert shifted.value == hor_pos.value + 30
+
+def test_chars():
+    word = page.words[3]
+    chars = word.chars
+    assert len(chars) == len(word.text)
+    assert "".join(_.text for _ in chars) == word.text
+    assert word.chars[0].word == word
+    assert word.chars[0].line == word.line

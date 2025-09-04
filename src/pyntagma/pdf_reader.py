@@ -1,10 +1,11 @@
+import logging
 import os
 import sys
-import logging
 from contextlib import contextmanager
-import pdfplumber
-from pathlib import Path
 from io import BytesIO
+from pathlib import Path
+
+import pdfplumber
 from pydantic import BaseModel
 
 
@@ -61,7 +62,7 @@ class Crop(BaseModel):
             cropped = page.within_bbox((x0, top, x1, bottom))
             return cropped.to_image(resolution=self.resolution).original
 
-    def save(self, path: Path = Path("crop.png")):
+    def save(self, path: Path | str = Path("crop.png")):
         """
         Save the cropped image to a file.
         """

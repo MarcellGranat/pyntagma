@@ -18,6 +18,7 @@ class Document(BaseModel):
     """
     A document consisting of multiple PDF files.
     """
+
     files: list[Path]
 
     @property
@@ -28,25 +29,58 @@ class Document(BaseModel):
         for file in files:
             num_pages = get_filelength(file)
             for i in range(num_pages):
-                pages.append(Page(path=file, file_page_number=i, page_number=index_in_document, document=self))
+                pages.append(
+                    Page(
+                        path=file,
+                        file_page_number=i,
+                        page_number=index_in_document,
+                        document=self,
+                    )
+                )
                 index_in_document += 1
         return pages
-    
+
     @cached_property
     def n_pages(self) -> int:
         """
         Get the number of pages in the document.
         """
         return len(self.pages)
-    
+
     def __len__(self):
         return self.n_pages
 
     def __str__(self):
         return f"Document(files={len(self.files)}, pages={len(self.pages)})"
-    
+
     def __repr__(self):
         return f"Document(files={len(self.files)}, pages={len(self.pages)})"
+
+
+@cache
+def _get_words(page: "Page") -> list["Word"]:
+    with silent_pdfplumber(page.path) as pdf:
+        return [
+            Word(**word, page=page)
+            for word in pdf.pages[page.file_page_number].extract_words()
+        ]
+
+
+@cache
+def _get_lines(page: "Page") -> list["Line"]:
+    with silent_pdfplumber(page.path) as pdf:
+        return [
+            Line(**line, page=page)
+            for line in pdf.pages[page.file_page_number].extract_text_lines()
+        ]
+
+
+@cache
+def _get_chars(page: "Page") -> list["Char"]:
+    with silent_pdfplumber(page.path) as pdf:
+        return [
+            Char(**char, page=page) for char in pdf.pages[page.file_page_number].chars
+        ]
 
 
 class Page(BaseModel):
@@ -55,30 +89,27 @@ class Page(BaseModel):
     page_number: int  # in the document
     document: Document
 
-    @cached_property
+    @property
     def words(self) -> list["Word"]:
-        with silent_pdfplumber(self.path) as pdf:
-            return [
-                Word(**word, page=self) for word in pdf.pages[self.file_page_number].extract_words()
-            ]
-        
-    @cached_property
+        return _get_words(self)
+
+    @property
     def lines(self) -> list["Line"]:
-        with silent_pdfplumber(self.path) as pdf:
-            return [
-                Line(**line, page=self) for line in pdf.pages[self.file_page_number].extract_text_lines()
-            ]
-        
+        return _get_lines(self)
+
+    @property
+    def chars(self) -> list["Char"]:
+        return _get_chars(self)
+
     @cached_property
     def height(self) -> float:
         with silent_pdfplumber(self.path) as pdf:
             return pdf.pages[self.file_page_number].height
-    
+
     @cached_property
-    def width(self) -> float:   
+    def width(self) -> float:
         with silent_pdfplumber(self.path) as pdf:
             return pdf.pages[self.file_page_number].width
-        
 
     @property
     def im(self):
@@ -87,7 +118,7 @@ class Page(BaseModel):
         """
         with silent_pdfplumber(self.path) as pdf:
             return pdf.pages[self.file_page_number].to_image()
-        
+
     def plot_on(self, items: Iterable, colors: str | list[str] | None, **kwargs):
         """
         Plot the page on the given items.
@@ -105,25 +136,24 @@ class Page(BaseModel):
             im.draw_rect(position.bbox, stroke=color, **kwargs)
 
         return im
-        
 
     def __hash__(self):
         return hash((self.path.absolute, self.file_page_number, self.page_number))
-    
+
     def __str__(self):
         return f"Page({self.path.name}, page_number={self.page_number})"
-    
+
     def __repr__(self):
         return f"Page({self.path.name}, page_number={self.page_number})"
 
 
-def words_of_line(line: 'Line') -> list['Word']:
+def words_of_line(line: "Line") -> list["Word"]:
     """
     Extract words from a line.
     """
     if not isinstance(line, Line):
         raise ValueError("line must be an instance of Line.")
-    
+
     words = []
     for word in line.page.words:
         if line.position.contains(word.position):
@@ -132,11 +162,11 @@ def words_of_line(line: 'Line') -> list['Word']:
         raise ValueError("No words found in the line.")
     if len(words) > 1:
         words = sorted(words, key=lambda x: x.position.x0.value)
-    
-    return words
-    
 
-def line_of_word(word: 'Word') -> 'Line':
+    return words
+
+
+def line_of_word(word: "Word") -> "Line":
     """
     Find the line that contains the word.
     """
@@ -144,13 +174,33 @@ def line_of_word(word: 'Word') -> 'Line':
         if line.position.contains(word.position):
             return line
     raise ValueError("No line found for the word.")
-    
+
+
+def chars_of_word(word: "Word") -> list["Char"]:
+    if not isinstance(word, Word):
+        raise ValueError("word must be an instance of Word.")
+
+    chars = []
+    for char in word.page.chars:
+        if word.position.contains(char.position):
+            chars.append(char)
+    if not chars:
+        raise ValueError("No chars found in the word.")
+    return chars
+
+
+def word_of_char(char: "Char") -> "Word":
+    for word in char.page.words:
+        if word.position.contains(char.position):
+            return word
+    raise ValueError("No word found for the char.")
+
 
 class Word(BaseModel):
-    page: "Page"
+    page: Page
     text: str
     x0: float
-    x1: float   
+    x1: float
     top: float
     bottom: float
 
@@ -160,24 +210,92 @@ class Word(BaseModel):
             x0=HorizontalCoordinate(page=self.page, value=self.x0),
             x1=HorizontalCoordinate(page=self.page, value=self.x1),
             top=VerticalCoordinate(page=self.page, value=self.top),
-            bottom=VerticalCoordinate(page=self.page, value=self.bottom)
+            bottom=VerticalCoordinate(page=self.page, value=self.bottom),
         )
 
     @cached_property
-    def line(self) -> 'Line':
+    def line(self) -> "Line":
         """
         Find the line that contains the word.
         """
         return line_of_word(self)
+
+    @property
+    def chars(self) -> list["Char"]:
+        """
+        Extract chars from the word.
+        """
+        return chars_of_word(self)
 
     def plot_on_page(self, color: str = "red") -> None:
         """
         Plot this word on the page.
         """
         return self.position.plot_on_page(color=color)
-    
+
     def __hash__(self) -> int:
-        return hash((self.page.path, self.page.page_number, self.text, self.x0, self.x1, self.top, self.bottom))
+        return hash(
+            (
+                self.page.path,
+                self.page.page_number,
+                self.text,
+                self.x0,
+                self.x1,
+                self.top,
+                self.bottom,
+            )
+        )
+
+
+class Char(BaseModel):
+    page: Page
+    text: str
+    x0: float
+    x1: float
+    top: float
+    bottom: float
+
+    @property
+    def position(self) -> Position:
+        return Position(
+            x0=HorizontalCoordinate(page=self.page, value=self.x0),
+            x1=HorizontalCoordinate(page=self.page, value=self.x1),
+            top=VerticalCoordinate(page=self.page, value=self.top),
+            bottom=VerticalCoordinate(page=self.page, value=self.bottom),
+        )
+
+    def plot_on_page(self, color: str = "red") -> None:
+        """
+        Plot this char on the page.
+        """
+        self.position.plot_on_page(color=color)
+
+    @property
+    def word(self) -> "Word":
+        """
+        Find the word that contains the char.
+        """
+        return word_of_char(self)
+
+    @property
+    def line(self) -> "Line":
+        """
+        Find the line that contains the char.
+        """
+        return self.word.line
+
+    def __hash__(self) -> int:
+        return hash(
+            (
+                self.page.path,
+                self.page.page_number,
+                self.text,
+                self.x0,
+                self.x1,
+                self.top,
+                self.bottom,
+            )
+        )
 
 
 class Line(BaseModel):
@@ -194,21 +312,41 @@ class Line(BaseModel):
             x0=HorizontalCoordinate(page=self.page, value=self.x0),
             x1=HorizontalCoordinate(page=self.page, value=self.x1),
             top=VerticalCoordinate(page=self.page, value=self.top),
-            bottom=VerticalCoordinate(page=self.page, value=self.bottom)
+            bottom=VerticalCoordinate(page=self.page, value=self.bottom),
         )
-    
+
     @cached_property
     def words(self) -> list[Word]:
         """
         Extract words from the line.
         """
         return words_of_line(self)
-    
+
+    @cached_property
+    def chars(self) -> list["Char"]:
+        """
+        Extract chars from the line.
+        """
+        _chars = []
+        for word in self.words:
+            _chars.extend(word.chars)
+        return _chars
+
     def plot_on_page(self, color: str = "red") -> None:
         """
         Plot this line on the page.
         """
         self.position.plot_on_page(color=color)
-    
+
     def __hash__(self) -> int:
-        return hash((self.page.path, self.page.page_number, self.text, self.x0, self.x1, self.top, self.bottom))
+        return hash(
+            (
+                self.page.path,
+                self.page.page_number,
+                self.text,
+                self.x0,
+                self.x1,
+                self.top,
+                self.bottom,
+            )
+        )
