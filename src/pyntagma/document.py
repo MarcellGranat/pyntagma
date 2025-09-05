@@ -5,6 +5,7 @@ from typing import Iterable
 from pydantic import BaseModel
 
 from .pdf_reader import silent_pdfplumber
+from pdfplumber.display import PageImage
 from .position import HorizontalCoordinate, Position, VerticalCoordinate
 
 
@@ -112,14 +113,14 @@ class Page(BaseModel):
             return pdf.pages[self.file_page_number].width
 
     @property
-    def im(self):
+    def im(self) -> PageImage:
         """
         Get the image of the page.
         """
         with silent_pdfplumber(self.path) as pdf:
             return pdf.pages[self.file_page_number].to_image()
 
-    def plot_on(self, items: Iterable, colors: str | list[str] | None, **kwargs):
+    def plot_on(self, items: Iterable, colors: str | list[str] | None, **kwargs) -> PageImage:
         """
         Plot the page on the given items.
         """
@@ -227,7 +228,7 @@ class Word(BaseModel):
         """
         return chars_of_word(self)
 
-    def plot_on_page(self, color: str = "red") -> None:
+    def plot_on_page(self, color: str = "red") -> PageImage:
         """
         Plot this word on the page.
         """

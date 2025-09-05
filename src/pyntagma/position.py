@@ -1,7 +1,7 @@
 from typing import Any, Iterable
 
 from pydantic import BaseModel
-
+from pdfplumber.display import PageImage
 from .pdf_reader import Crop
 
 
@@ -278,7 +278,7 @@ class Position(BaseModel):
         """
         return (self.x0.value, self.top.value, self.x1.value, self.bottom.value)
 
-    def plot_on_page(self, color: str = "red") -> None:
+    def plot_on_page(self, color: str = "red") -> PageImage:
         page = self.vertical.top.page
         return page.plot_on([self], colors=[color])
 
@@ -351,7 +351,7 @@ class PdfAnchor(BaseModel):
         """
         return self.position.crop.im.show
 
-    def plot_on_page(self, color: str = "red") -> None:
+    def plot_on_page(self, color: str = "red") -> PageImage:
         """
         Plot this anchor on the page.
         """
