@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 
-from pyntagma import Document
+from src.pyntagma import Document
 
 # Create a document with the actual 2-part PDF files
 test_files = [

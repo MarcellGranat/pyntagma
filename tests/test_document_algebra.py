@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from pyntagma import Document
-from pyntagma.position import Position, position_union
+from src.pyntagma import Document
+from src.pyntagma.position import Position, position_union
 
 # Create a document with the actual 2-part PDF files
 test_files = [

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from pyntagma import Crop
+from src.pyntagma import Crop
 
 # Create crops with the actual 2-part PDF files
 test_crop = Crop(

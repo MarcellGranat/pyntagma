@@ -2,7 +2,7 @@ from unittest.mock import Mock
 
 import pytest
 
-from pyntagma import (
+from src.pyntagma import (
     HorizontalCoordinate,
     HorizontalPosition,
     Position,
