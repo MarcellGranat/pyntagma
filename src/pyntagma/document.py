@@ -2,11 +2,16 @@ from functools import cache, cached_property
 from pathlib import Path
 from typing import Iterable
 
+from pdfplumber.display import PageImage
 from pydantic import BaseModel
 
-from .pdf_reader import silent_pdfplumber
-from pdfplumber.display import PageImage
-from .position import HorizontalCoordinate, Position, VerticalCoordinate
+from src.pyntagma.pdf_reader import silent_pdfplumber
+from src.pyntagma.position import (
+    HorizontalCoordinate,
+    PdfAnchor,
+    Position,
+    VerticalCoordinate,
+)
 
 
 @cache
@@ -120,7 +125,9 @@ class Page(BaseModel):
         with silent_pdfplumber(self.path) as pdf:
             return pdf.pages[self.file_page_number].to_image()
 
-    def plot_on(self, items: Iterable, colors: str | list[str] | None, **kwargs) -> PageImage:
+    def plot_on(
+        self, items: Iterable, colors: str | list[str] | None, **kwargs
+    ) -> PageImage:
         """
         Plot the page on the given items.
         """
@@ -152,9 +159,6 @@ def words_of_line(line: "Line") -> list["Word"]:
     """
     Extract words from a line.
     """
-    if not isinstance(line, Line):
-        raise ValueError("line must be an instance of Line.")
-
     words = []
     for word in line.page.words:
         if line.position.contains(word.position):
@@ -197,8 +201,7 @@ def word_of_char(char: "Char") -> "Word":
     raise ValueError("No word found for the char.")
 
 
-class Word(BaseModel):
-    page: Page
+class TextAnchor(PdfAnchor):
     text: str
     x0: float
     x1: float
@@ -214,6 +217,21 @@ class Word(BaseModel):
             bottom=VerticalCoordinate(page=self.page, value=self.bottom),
         )
 
+    def __hash__(self) -> int:
+        return hash(
+            (
+                self.page.path,
+                self.page.page_number,
+                self.text,
+                self.x0,
+                self.x1,
+                self.top,
+                self.bottom,
+            )
+        )
+
+
+class Word(TextAnchor):
     @cached_property
     def line(self) -> "Line":
         """
@@ -228,49 +246,8 @@ class Word(BaseModel):
         """
         return chars_of_word(self)
 
-    def plot_on_page(self, color: str = "red") -> PageImage:
-        """
-        Plot this word on the page.
-        """
-        return self.position.plot_on_page(color=color)
 
-    def __hash__(self) -> int:
-        return hash(
-            (
-                self.page.path,
-                self.page.page_number,
-                self.text,
-                self.x0,
-                self.x1,
-                self.top,
-                self.bottom,
-            )
-        )
-
-
-class Char(BaseModel):
-    page: Page
-    text: str
-    x0: float
-    x1: float
-    top: float
-    bottom: float
-
-    @property
-    def position(self) -> Position:
-        return Position(
-            x0=HorizontalCoordinate(page=self.page, value=self.x0),
-            x1=HorizontalCoordinate(page=self.page, value=self.x1),
-            top=VerticalCoordinate(page=self.page, value=self.top),
-            bottom=VerticalCoordinate(page=self.page, value=self.bottom),
-        )
-
-    def plot_on_page(self, color: str = "red") -> None:
-        """
-        Plot this char on the page.
-        """
-        self.position.plot_on_page(color=color)
-
+class Char(TextAnchor):
     @property
     def word(self) -> "Word":
         """
@@ -285,37 +262,8 @@ class Char(BaseModel):
         """
         return self.word.line
 
-    def __hash__(self) -> int:
-        return hash(
-            (
-                self.page.path,
-                self.page.page_number,
-                self.text,
-                self.x0,
-                self.x1,
-                self.top,
-                self.bottom,
-            )
-        )
 
-
-class Line(BaseModel):
-    page: "Page"
-    text: str
-    x0: float
-    x1: float
-    top: float
-    bottom: float
-
-    @property
-    def position(self) -> Position:
-        return Position(
-            x0=HorizontalCoordinate(page=self.page, value=self.x0),
-            x1=HorizontalCoordinate(page=self.page, value=self.x1),
-            top=VerticalCoordinate(page=self.page, value=self.top),
-            bottom=VerticalCoordinate(page=self.page, value=self.bottom),
-        )
-
+class Line(TextAnchor):
     @cached_property
     def words(self) -> list[Word]:
         """
@@ -332,22 +280,3 @@ class Line(BaseModel):
         for word in self.words:
             _chars.extend(word.chars)
         return _chars
-
-    def plot_on_page(self, color: str = "red") -> None:
-        """
-        Plot this line on the page.
-        """
-        self.position.plot_on_page(color=color)
-
-    def __hash__(self) -> int:
-        return hash(
-            (
-                self.page.path,
-                self.page.page_number,
-                self.text,
-                self.x0,
-                self.x1,
-                self.top,
-                self.bottom,
-            )
-        )

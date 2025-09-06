@@ -1,7 +1,8 @@
 from typing import Any, Iterable
 
-from pydantic import BaseModel
 from pdfplumber.display import PageImage
+from pydantic import BaseModel, Field
+
 from .pdf_reader import Crop
 
 
@@ -319,16 +320,14 @@ class PdfAnchor(BaseModel):
     A base class for anchors in a PDF document.
     """
 
+    page: Any = Field(description="A valid Page object from Pyntagma")
+
     @property
     def position(self) -> Position:
         """
         Get the position of the anchor.
         """
         raise NotImplementedError("Subclasses must implement the position property.")
-
-    @property
-    def page(self):
-        return self.position.top.page
 
     @property
     def horizontal(self) -> HorizontalPosition:
