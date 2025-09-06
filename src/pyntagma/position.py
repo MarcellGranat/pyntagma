@@ -1,6 +1,7 @@
 from typing import Any, Iterable
 
 from pdfplumber.display import PageImage
+from pydantic_ai import BinaryContent
 from pydantic import BaseModel, Field
 
 from .pdf_reader import Crop
@@ -365,6 +366,17 @@ class PdfAnchor(BaseModel):
 
     def __str__(self):
         return f"PdfAnchor(page: {self.position.top.page_number})"
+
+    @property
+    def binary_content(self) -> BinaryContent:
+        """
+        Binary content of this anchor's crop for multimodal prompts.
+
+        Uses the cropped PNG bytes of the anchor's position.
+        """
+        # BinaryContent typically accepts raw bytes and infers or carries a mime type.
+        # Provide PNG bytes from our crop to make it model-friendly.
+        return BinaryContent(self.position.crop.bytes)
 
 
 def left_position_join(

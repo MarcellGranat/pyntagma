@@ -1,23 +1,12 @@
-from collections.abc import Sequence
 from functools import partial
+from typing import Any
 
 from pydantic import BaseModel
-from pydantic_ai import Agent, BinaryContent, NativeOutput
+from pydantic_ai import Agent, NativeOutput
 from pydantic_ai.models.openai import OpenAIChatModel
 from pydantic_ai.providers.ollama import OllamaProvider
 
-from src.pyntagma.pdf_reader import Crop
-
-
-class Fruit(BaseModel):
-    name: str
-    color: str
-
-
-class Vehicle(BaseModel):
-    name: str
-    wheels: int
-
+from src.pyntagma.position import PdfAnchor
 
 ollama_model = OpenAIChatModel(
     model_name="gemma3:4b",
@@ -31,27 +20,56 @@ OllamaChatModel = partial(
 )
 
 
-class DocumentAgent(Agent):
-    """
-    Agent that works on crops of your document.
-    """
+class DocumentAgent(BaseModel):
+    anchor: PdfAnchor
+    output_type: Any
+    # Accept any chat model implementation (e.g., OpenAIChatModel)
+    model: Any
+    image_added: bool = False
+    _agent: Agent | None = None  # initalise later
+
+    def model_post_init(self, _) -> None:
+        self._agent = Agent(model=self.model, output_type=self.output_type)
+
+    @property
+    def anchor_content(self):
+        # Reuse the anchor's own binary content (PNG bytes of its crop)
+        return self.anchor.binary_content
 
     def run_sync(
         self,
-        user_prompt: str | Sequence | None = None,
-        crop: Crop | None = None,
+        user_prompt,
+        anchor: PdfAnchor | None = None,
+        output_type: Any = None,
+        include_image: bool | None = None,
         **kwargs,
     ):
-        if user_prompt is None and crop is not None:
-            user_prompt = []
+        """
+        Run the agent synchronously.
 
-        if crop is not None:
-            if isinstance(user_prompt, str):
-                user_prompt = [user_prompt]
-
-            crop_bytes = BinaryContent(crop.bytes, media_type="image/png")
-            if not isinstance(user_prompt, list):
-                raise TypeError("user_prompt is expected to be a list!")
-            user_prompt.append(crop_bytes)
-
-        super().run_sync(user_prompt=user_prompt, **kwargs)
+        - If `include_image` is True, append the anchor's image as BinaryContent
+          to the user prompt. If `anchor` is provided, use that, otherwise fall
+          back to `self.anchor`.
+        - `user_prompt` can be a string or a list of content items; the image
+          will be appended appropriately.
+        """
+        content = user_prompt
+        if include_image is None:
+            if self.image_added is True:
+                include_image = False
+            if self.image_added is False:
+                include_image = True
+                self.image_added = True
+        if include_image:
+            use_anchor = anchor or self.anchor
+            if use_anchor is not None:
+                if isinstance(content, (list, tuple)):
+                    content = list(content) + [use_anchor.binary_content]
+                else:
+                    content = [content, use_anchor.binary_content]
+        if output_type is not None:
+            if "gemma3" in self.model.model_name:
+                output_type = NativeOutput(output_type)
+        if self._agent is not None:
+            return self._agent.run_sync(content, **kwargs)
+        raise Exception("Agent is not created!")
