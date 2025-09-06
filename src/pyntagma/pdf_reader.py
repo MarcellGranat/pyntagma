@@ -6,12 +6,13 @@ from io import BytesIO
 from pathlib import Path
 
 import pdfplumber
+from PIL.Image import Image
 from pydantic import BaseModel
 
 
 @contextmanager
 def silent():
-    devnull = open(os.devnull, 'w')
+    devnull = open(os.devnull, "w")
     old_stdout, old_stderr = sys.stdout, sys.stderr
     sys.stdout, sys.stderr = devnull, devnull
     old_log_level = logging.getLogger().level
@@ -43,15 +44,17 @@ class Crop(BaseModel):
 
     def __str__(self):
         return f"Crop(x0={self.x0}, x1={self.x1}, top={self.top}, bottom={self.bottom})"
-    
+
     def __repr__(self):
         return f"Crop(x0={self.x0}, x1={self.x1}, top={self.top}, bottom={self.bottom})"
-    
+
     def __hash__(self):
-        return hash((self.path, self.page_number, self.x0, self.x1, self.top, self.bottom))
-    
+        return hash(
+            (self.path, self.page_number, self.x0, self.x1, self.top, self.bottom)
+        )
+
     @property
-    def im(self):
+    def im(self) -> Image:
         with silent_pdfplumber(self.path) as pdf:
             x0 = max(self.x0 - self.padding, 0)
             x1 = min(self.x1 + self.padding, pdf.pages[self.page_number].width)
@@ -79,7 +82,7 @@ class Crop(BaseModel):
         im.save(buffer, format="PNG")
         buffer.seek(0)
         return buffer
-    
+
     @property
     def bytes(self) -> bytes:
         """
