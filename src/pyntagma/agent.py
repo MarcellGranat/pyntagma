@@ -14,13 +14,7 @@ from pydantic_ai.providers.ollama import OllamaProvider
 
 from src.pyntagma.position import PdfAnchor
 
-#: A ready-to-use chat model targeting an Ollama local endpoint.
-ollama_model = OpenAIChatModel(
-    model_name="gemma3:4b",
-    provider=OllamaProvider(base_url="http://localhost:11434/v1"),
-)
-
-#: Convenience factory for creating Ollama-backed chat models with defaults.
+# Convenience factory for creating Ollama-backed chat models with defaults.
 OllamaChatModel = partial(
     OpenAIChatModel,
     model_name="gemma3:4b",  # most prefered model

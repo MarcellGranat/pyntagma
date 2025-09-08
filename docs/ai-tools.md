@@ -42,3 +42,21 @@ Tips
   before sending to the model.
 - Keep crops tight; smaller, relevant images reduce token/compute costs.
 - For local models via Ollama, ensure the server is running and reachable.
+
+### Ollama-dependent tests
+
+Some tests exercise `DocumentAgent` with a local Ollama model (`gemma3:4b`).
+
+- File: `tests/test_agent.py`
+- Requires Ollama at `http://127.0.0.1:11434` and model `gemma3:4b` pulled.
+- If Ollama or the model isn’t available, these tests are automatically skipped.
+
+Enable locally:
+
+```bash
+brew install ollama           # macOS, or install from ollama.com
+ollama serve                  # ensure the service is running
+ollama pull gemma3:4b         # download the model
+ollama list                   # verify model is present
+uv run pytest -k test_agent -v
+```
