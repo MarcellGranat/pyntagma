@@ -4,6 +4,8 @@
 
 Welcome to the documentation for the `pyntagma` package!
 
+Pyntagma is a Python library for creating and managing complex data extraction pipelines with ease. Its name is derived from the Greek word 'Syntagma', meaning 'composition', symbolizing that this package fits for semi-structured documents.
+
 Pyntagma aims to bring modern document-processing tools together into a single,
 standardized, and convenient library. It lets practitioners and researchers
 compose precise, testable rules to extract complex data from large archives.

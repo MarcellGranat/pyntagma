@@ -8,7 +8,7 @@
     <img src="docs/banner.png" alt="Pyntagma Banner">
 </div>
 
-Pyntagma is a Python library for creating and managing complex data structures with ease. Its name is derived from the Greek word 'Syntagma', meaning 'composition', symbolizing that this package fits for semi-structured documents.
+Pyntagma is a Python library for creating and managing complex data extraction pipelines with ease. Its name is derived from the Greek word 'Syntagma', meaning 'composition', symbolizing that this package fits for semi-structured documents.
 
 ## Features
 
