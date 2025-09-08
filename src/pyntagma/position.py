@@ -1,8 +1,8 @@
 from typing import Any, Iterable
 
 from pdfplumber.display import PageImage
-from pydantic_ai import BinaryContent
 from pydantic import BaseModel, Field
+from pydantic_ai import BinaryContent
 
 from .pdf_reader import Crop
 
@@ -376,7 +376,7 @@ class PdfAnchor(BaseModel):
         """
         # BinaryContent typically accepts raw bytes and infers or carries a mime type.
         # Provide PNG bytes from our crop to make it model-friendly.
-        return BinaryContent(self.position.crop.bytes)
+        return BinaryContent(self.position.crop.bytes, media_type="image/png")
 
 
 def left_position_join(

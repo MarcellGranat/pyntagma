@@ -67,9 +67,12 @@ class DocumentAgent(BaseModel):
                     content = list(content) + [use_anchor.binary_content]
                 else:
                     content = [content, use_anchor.binary_content]
-        if output_type is not None:
+
+        use_output_type = output_type or self.output_type
+
+        if use_output_type is not None:
             if "gemma3" in self.model.model_name:
-                output_type = NativeOutput(output_type)
+                use_output_type = NativeOutput(use_output_type)
         if self._agent is not None:
             return self._agent.run_sync(content, **kwargs)
         raise Exception("Agent is not created!")
