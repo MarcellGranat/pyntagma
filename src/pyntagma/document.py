@@ -1,3 +1,9 @@
+"""High-level document model built on top of pdfplumber.
+
+Provides `Document`, `Page` and text primitives (`Line`, `Word`, `Char`) with
+geometric positions, plus helpers to navigate between them.
+"""
+
 from functools import cache, cached_property
 from pathlib import Path
 from typing import Iterable
@@ -16,6 +22,7 @@ from src.pyntagma.position import (
 
 @cache
 def get_filelength(file: Path) -> int:
+    """Return the number of pages for a PDF file."""
     with silent_pdfplumber(file) as pdf:
         return len(pdf.pages)
 
@@ -90,6 +97,11 @@ def _get_chars(page: "Page") -> list["Char"]:
 
 
 class Page(BaseModel):
+    """A single page within a `Document`.
+
+    Indices are available both relative to the file (`file_page_number`) and
+    relative to the full document (`page_number`).
+    """
     path: Path
     file_page_number: int  # in the file
     page_number: int  # in the document
@@ -182,6 +194,7 @@ def line_of_word(word: "Word") -> "Line":
 
 
 def chars_of_word(word: "Word") -> list["Char"]:
+    """Extract chars belonging to a given `Word`."""
     if not isinstance(word, Word):
         raise ValueError("word must be an instance of Word.")
 
@@ -195,6 +208,7 @@ def chars_of_word(word: "Word") -> list["Char"]:
 
 
 def word_of_char(char: "Char") -> "Word":
+    """Return the `Word` that contains the given `Char`."""
     for word in char.page.words:
         if word.position.contains(char.position):
             return word
@@ -202,6 +216,7 @@ def word_of_char(char: "Char") -> "Word":
 
 
 class TextAnchor(PdfAnchor):
+    """Base class for textual anchors with absolute coordinates on a page."""
     text: str
     x0: float
     x1: float

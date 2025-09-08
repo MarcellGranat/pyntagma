@@ -1,17 +1,26 @@
+"""Coordinate and position primitives for PDF pages.
+
+Defines horizontal/vertical coordinates and composite positions with helpers
+for arithmetic, comparison and visualization.
+"""
+
 from typing import Any, Iterable
 
 from pdfplumber.display import PageImage
 from pydantic import BaseModel, Field
+from pydantic_ai import BinaryContent
 
 from .pdf_reader import Crop
 
 
 class VerticalCoordinate(BaseModel):
+    """A vertical coordinate (y) bound to a specific page."""
     page: Any
     value: float
 
     @property
     def relative(self) -> float:
+        """Return the y position normalized to page height (0..1)."""
         return self.value / self.page.height
 
     def __hash__(self):
@@ -19,6 +28,7 @@ class VerticalCoordinate(BaseModel):
 
     @property
     def page_number(self) -> int:
+        """Return the document-level page index for this coordinate."""
         return self.page.page_number
 
     def shift(self, delta: float) -> "VerticalCoordinate":
@@ -115,15 +125,18 @@ class VerticalCoordinate(BaseModel):
 
 
 class HorizontalCoordinate(BaseModel):
+    """A horizontal coordinate (x) bound to a specific page."""
     page: Any
     value: float
 
     @property
     def relative(self) -> float:
+        """Return the x position normalized to page width (0..1)."""
         return self.value / self.page.width
 
     @property
     def page_number(self) -> int:
+        """Return the document-level page index for this coordinate."""
         return self.page.page_number
 
     def __hash__(self):
@@ -142,6 +155,7 @@ class HorizontalCoordinate(BaseModel):
         return self.value >= other.value
 
     def shift(self, delta: float | int) -> "HorizontalCoordinate":
+        """Return a new coordinate shifted by `delta` within page bounds."""
         if delta > 0:
             if self.value + delta <= self.page.width:
                 return HorizontalCoordinate(page=self.page, value=self.value + delta)
@@ -168,6 +182,7 @@ class HorizontalCoordinate(BaseModel):
 
 
 class VerticalPosition(BaseModel):
+    """Vertical span (top..bottom) on a page sequence."""
     top: VerticalCoordinate
     bottom: VerticalCoordinate
 
@@ -198,6 +213,7 @@ class VerticalPosition(BaseModel):
 
 
 class HorizontalPosition(BaseModel):
+    """Horizontal span (x0..x1) on a page."""
     x0: HorizontalCoordinate
     x1: HorizontalCoordinate
 
@@ -228,6 +244,7 @@ class HorizontalPosition(BaseModel):
 
 
 class Position(BaseModel):
+    """A rectangular region on a page, expressed by four coordinates."""
     x0: HorizontalCoordinate
     x1: HorizontalCoordinate
     top: VerticalCoordinate
@@ -246,14 +263,17 @@ class Position(BaseModel):
 
     @property
     def vertical(self) -> VerticalPosition:
+        """Return the vertical span of this position."""
         return VerticalPosition(top=self.top, bottom=self.bottom)
 
     @property
     def horizontal(self) -> HorizontalPosition:
+        """Return the horizontal span of this position."""
         return HorizontalPosition(x0=self.x0, x1=self.x1)
 
     @property
     def crop(self) -> Crop:
+        """Return a `Crop` representing this position on a single page."""
         if self.vertical.top.page_number == self.vertical.bottom.page_number:
             return Crop(
                 path=self.vertical.top.page.path,
@@ -280,10 +300,12 @@ class Position(BaseModel):
         return (self.x0.value, self.top.value, self.x1.value, self.bottom.value)
 
     def plot_on_page(self, color: str = "red") -> PageImage:
+        """Plot this position on its page and return the page image object."""
         page = self.vertical.top.page
         return page.plot_on([self], colors=[color])
 
     def contains(self, other: "Position") -> bool:
+        """Return True if `other` is fully inside this position."""
         return (
             self.x0 <= other.x0
             and self.x1 >= other.x1
@@ -296,6 +318,7 @@ class Position(BaseModel):
 
 
 def get_position(item: Any) -> Position:
+    """Return a `Position` from an item or raise if unavailable."""
     if isinstance(item, Position):
         return item
     elif hasattr(item, "position"):
@@ -307,6 +330,7 @@ def get_position(item: Any) -> Position:
 
 
 def position_union(items: Iterable) -> Position:
+    """Return the minimal `Position` enclosing all items' positions."""
     min_x0 = min(get_position(item).horizontal.x0 for item in items)
     max_x1 = max(get_position(item).horizontal.x1 for item in items)
     min_top = min(get_position(item).vertical.top for item in items)
@@ -365,6 +389,17 @@ class PdfAnchor(BaseModel):
 
     def __str__(self):
         return f"PdfAnchor(page: {self.position.top.page_number})"
+
+    @property
+    def binary_content(self) -> BinaryContent:
+        """
+        Binary content of this anchor's crop for multimodal prompts.
+
+        Uses the cropped PNG bytes of the anchor's position.
+        """
+        # BinaryContent typically accepts raw bytes and infers or carries a mime type.
+        # Provide PNG bytes from our crop to make it model-friendly.
+        return BinaryContent(self.position.crop.bytes, media_type="image/png")
 
 
 def left_position_join(
