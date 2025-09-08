@@ -387,6 +387,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="DocumentAgent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ollama-dependent-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ollama-dependent tests
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -437,6 +452,21 @@
       DocumentAgent
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="DocumentAgent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ollama-dependent-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ollama-dependent tests
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -497,6 +527,20 @@ print(resp.data)
 <li>Keep crops tight; smaller, relevant images reduce token/compute costs.</li>
 <li>For local models via Ollama, ensure the server is running and reachable.</li>
 </ul>
+<h3 id="ollama-dependent-tests">Ollama-dependent tests</h3>
+<p>Some tests exercise <code>DocumentAgent</code> with a local Ollama model (<code>gemma3:4b</code>).</p>
+<ul>
+<li>File: <code>tests/test_agent.py</code></li>
+<li>Requires Ollama at <code>http://127.0.0.1:11434</code> and model <code>gemma3:4b</code> pulled.</li>
+<li>If Ollama or the model isn’t available, these tests are automatically skipped.</li>
+</ul>
+<p>Enable locally:</p>
+<pre><code class="language-bash">brew install ollama           # macOS, or install from ollama.com
+ollama serve                  # ensure the service is running
+ollama pull gemma3:4b         # download the model
+ollama list                   # verify model is present
+uv run pytest -k test_agent -v
+</code></pre>
 
 
 
