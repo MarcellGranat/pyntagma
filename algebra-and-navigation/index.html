@@ -8,22 +8,28 @@
       
       
       
+        <link rel="canonical" href="https://marcellgranat.github.io/pyntagma/algebra-and-navigation/">
       
       
+        <link rel="prev" href="../overview/">
       
-      <link rel="icon" href="/pyntagma/assets/images/favicon.png">
+      
+        <link rel="next" href="../ai-tools/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
     
     
       
-        <title>Pyntagma</title>
+        <title>Tidy syntax for documents - Pyntagma</title>
       
     
     
-      <link rel="stylesheet" href="/pyntagma/assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="/pyntagma/assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -42,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL("/pyntagma/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -65,6 +71,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#algebra-vs-bidirectional-navigation" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -77,9 +88,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/pyntagma/." title="Pyntagma" class="md-header__button md-logo" aria-label="Pyntagma" data-md-component="logo">
+    <a href=".." title="Pyntagma" class="md-header__button md-logo" aria-label="Pyntagma" data-md-component="logo">
       
-  <img src="/pyntagma/logo.min.svg" alt="logo">
+  <img src="../logo.min.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -96,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Tidy syntax for documents
             
           </span>
         </div>
@@ -186,9 +197,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/pyntagma/." title="Pyntagma" class="md-nav__button md-logo" aria-label="Pyntagma" data-md-component="logo">
+    <a href=".." title="Pyntagma" class="md-nav__button md-logo" aria-label="Pyntagma" data-md-component="logo">
       
-  <img src="/pyntagma/logo.min.svg" alt="logo">
+  <img src="../logo.min.svg" alt="logo">
 
     </a>
     Pyntagma
@@ -215,7 +226,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/pyntagma/." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -237,7 +248,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/pyntagma/overview/" class="md-nav__link">
+      <a href="../overview/" class="md-nav__link">
         
   
   
@@ -256,18 +267,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -283,7 +296,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Concepts
@@ -294,10 +307,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/pyntagma/algebra-and-navigation/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Tidy syntax for documents
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -308,6 +343,53 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#algebra-geometry-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algebra: Geometry First
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bidirectional-navigation-structure-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bidirectional Navigation: Structure First
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-the-right-tool-or-combine" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choosing the Right Tool or COMBINE
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -320,7 +402,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/pyntagma/ai-tools/" class="md-nav__link">
+      <a href="../ai-tools/" class="md-nav__link">
         
   
   
@@ -360,6 +442,43 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#algebra-geometry-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algebra: Geometry First
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bidirectional-navigation-structure-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bidirectional Navigation: Structure First
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-the-right-tool-or-combine" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choosing the Right Tool or COMBINE
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -371,8 +490,80 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="algebra-vs-bidirectional-navigation">Algebra vs. Bidirectional Navigation</h1>
+<p>Pyntagma offers two complementary ways to work with documents:</p>
+<ul>
+<li>Algebra on positions: operate on geometric regions precisely and compose rules.</li>
+<li>Bidirectional navigation: move between text units (lines, words, chars) reliably.</li>
+</ul>
+<p>Understanding the difference helps you design robust extraction pipelines.</p>
+<h2 id="algebra-geometry-first">Algebra: Geometry First</h2>
+<p>The algebra treats regions as first-class values.</p>
+<ul>
+<li>Coordinates: <code>VerticalCoordinate</code>, <code>HorizontalCoordinate</code></li>
+<li>Spans: <code>VerticalPosition</code>, <code>HorizontalPosition</code></li>
+<li>Region: <code>Position</code> (x0, x1, top, bottom)</li>
+<li>Set ops: <code>position_union(items)</code> returns the minimal bounding region.</li>
+<li>Joins: <code>left_position_join(x, y, after=True, uniquely=True, ...)</code> pairs items
+  by relative vertical order with optional distance constraints.</li>
+</ul>
+<p>Why it’s powerful</p>
+<ul>
+<li>Composable and testable: build extraction by combining small geometric rules.</li>
+<li>Deterministic: comparisons/orderings make behavior explicit across pages.</li>
+<li>Model-agnostic: works without OCR or AI; pairs well with both.</li>
+</ul>
+<p>Example</p>
+<pre><code class="language-python"># Select a headline region then expand by padding logic
+pos = position_union(page.lines[:2])
+headline = Position(x0=pos.x0, x1=pos.x1, top=pos.top, bottom=pos.bottom)
+im = headline.plot_on_page()
+</code></pre>
+<h2 id="bidirectional-navigation-structure-first">Bidirectional Navigation: Structure First</h2>
+<p>Navigation makes it easy to traverse textual structure while staying grounded in geometry.</p>
+<ul>
+<li>From a <code>Line</code> → <code>words</code>: <code>line.words</code> or <code>words_of_line(line)</code></li>
+<li>From a <code>Word</code> → <code>line</code>: <code>word.line</code> or <code>line_of_word(word)</code></li>
+<li>From a <code>Word</code> → <code>chars</code>: <code>word.chars</code> or <code>chars_of_word(word)</code></li>
+<li>From a <code>Char</code> → <code>word</code>: <code>char.word</code> or <code>word_of_char(char)</code></li>
+</ul>
+<p>Why it’s powerful</p>
+<ul>
+<li>Expressive: grab neighboring units without recomputing geometry.</li>
+<li>Symmetric: go up and down the hierarchy reliably.</li>
+<li>Efficient: many lookups are cached for repeated access patterns.</li>
+</ul>
+<p>Example</p>
+<pre><code class="language-python">first = page.lines[0]
+tokens = [w.text for w in first.words]
+owner = first.words[0].line  # round-trip is safe
+</code></pre>
+<h2 id="choosing-the-right-tool-or-combine">Choosing the Right Tool or COMBINE</h2>
+<p>Most of the time, you’ll use both approaches together. Some examples:</p>
+<p>You want the numbers from a page that is in the header:</p>
+<pre><code class="language-python">possible_words = [w.vertical.bottom.value &lt; 100 for w in page.words]
+numbers = [w for w in page.words if w.text.isdigit() and possible_words]
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -408,10 +599,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "/pyntagma/", "features": [], "search": "/pyntagma/assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="/pyntagma/assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
     
   </body>
