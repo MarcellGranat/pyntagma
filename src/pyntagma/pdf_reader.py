@@ -1,3 +1,9 @@
+"""Thin wrappers around pdfplumber for quiet PDF IO and cropping.
+
+Includes a `silent` context manager to suppress stdout/stderr and a `Crop`
+utility for extracting regions from a page as images/bytes.
+"""
+
 import logging
 import os
 import sys
@@ -12,6 +18,7 @@ from pydantic import BaseModel
 
 @contextmanager
 def silent():
+    """Temporarily silence stdout/stderr and lower logging during a block."""
     devnull = open(os.devnull, "w")
     old_stdout, old_stderr = sys.stdout, sys.stderr
     sys.stdout, sys.stderr = devnull, devnull
@@ -27,12 +34,14 @@ def silent():
 
 @contextmanager
 def silent_pdfplumber(path_or_fp, **kwargs):
+    """Open a pdfplumber PDF while suppressing output within the block."""
     with silent():
         with pdfplumber.open(path_or_fp=path_or_fp, **kwargs) as pdf:
             yield pdf
 
 
 class Crop(BaseModel):
+    """Represents a rectangular crop on a PDF page and utilities to render it."""
     path: Path
     page_number: int
     x0: float
@@ -55,6 +64,7 @@ class Crop(BaseModel):
 
     @property
     def im(self) -> Image:
+        """Return the PIL image for this crop (respects padding/resolution)."""
         with silent_pdfplumber(self.path) as pdf:
             x0 = max(self.x0 - self.padding, 0)
             x1 = min(self.x1 + self.padding, pdf.pages[self.page_number].width)

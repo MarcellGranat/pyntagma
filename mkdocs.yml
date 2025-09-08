@@ -11,3 +11,7 @@ theme:
     accent: deep orange
 nav:
   - Home: index.md
+  - Overview: overview.md
+  - Concepts:
+      - Tidy syntax for documents: algebra-and-navigation.md
+      - AI Tools: ai-tools.md
