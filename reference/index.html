@@ -1,0 +1,6053 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://marcellgranat.github.io/pyntagma/reference/">
+      
+      
+        <link rel="prev" href="../ai-tools/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Reference - Pyntagma</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Pyntagma" class="md-header__button md-logo" aria-label="Pyntagma" data-md-component="logo">
+      
+  <img src="../logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pyntagma
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/marcellgranat/pyntagma" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pyntagma
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Pyntagma" class="md-nav__button md-logo" aria-label="Pyntagma" data-md-component="logo">
+      
+  <img src="../logo.svg" alt="logo">
+
+    </a>
+    Pyntagma
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/marcellgranat/pyntagma" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pyntagma
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Concepts
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../algebra-and-navigation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tidy syntax for documents
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI Tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#package" class="md-nav__link">
+    <span class="md-ellipsis">
+      Package
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma" class="md-nav__link">
+    <span class="md-ellipsis">
+      pyntagma
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.Document" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Document">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Document.n_pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      n_pages
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.Line" class="md-nav__link">
+    <span class="md-ellipsis">
+      Line
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Line.words" class="md-nav__link">
+    <span class="md-ellipsis">
+      words
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Line.chars" class="md-nav__link">
+    <span class="md-ellipsis">
+      chars
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.Page" class="md-nav__link">
+    <span class="md-ellipsis">
+      Page
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Page.im" class="md-nav__link">
+    <span class="md-ellipsis">
+      im
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Page.plot_on" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_on
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.Word" class="md-nav__link">
+    <span class="md-ellipsis">
+      Word
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Word">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Word.line" class="md-nav__link">
+    <span class="md-ellipsis">
+      line
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Word.chars" class="md-nav__link">
+    <span class="md-ellipsis">
+      chars
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.Crop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Crop.im" class="md-nav__link">
+    <span class="md-ellipsis">
+      im
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Crop.buffer" class="md-nav__link">
+    <span class="md-ellipsis">
+      buffer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Crop.bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      bytes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Crop.save" class="md-nav__link">
+    <span class="md-ellipsis">
+      save
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.HorizontalCoordinate" class="md-nav__link">
+    <span class="md-ellipsis">
+      HorizontalCoordinate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HorizontalCoordinate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.HorizontalCoordinate.relative" class="md-nav__link">
+    <span class="md-ellipsis">
+      relative
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.HorizontalCoordinate.page_number" class="md-nav__link">
+    <span class="md-ellipsis">
+      page_number
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.HorizontalCoordinate.shift" class="md-nav__link">
+    <span class="md-ellipsis">
+      shift
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.HorizontalPosition" class="md-nav__link">
+    <span class="md-ellipsis">
+      HorizontalPosition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.PdfAnchor" class="md-nav__link">
+    <span class="md-ellipsis">
+      PdfAnchor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PdfAnchor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.PdfAnchor.position" class="md-nav__link">
+    <span class="md-ellipsis">
+      position
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.PdfAnchor.horizontal" class="md-nav__link">
+    <span class="md-ellipsis">
+      horizontal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.PdfAnchor.vertical" class="md-nav__link">
+    <span class="md-ellipsis">
+      vertical
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.PdfAnchor.show" class="md-nav__link">
+    <span class="md-ellipsis">
+      show
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.PdfAnchor.binary_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      binary_content
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.PdfAnchor.plot_on_page" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_on_page
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.Position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Position
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Position">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Position.vertical" class="md-nav__link">
+    <span class="md-ellipsis">
+      vertical
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Position.horizontal" class="md-nav__link">
+    <span class="md-ellipsis">
+      horizontal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Position.crop" class="md-nav__link">
+    <span class="md-ellipsis">
+      crop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Position.show" class="md-nav__link">
+    <span class="md-ellipsis">
+      show
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Position.bbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      bbox
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Position.plot_on_page" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_on_page
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Position.contains" class="md-nav__link">
+    <span class="md-ellipsis">
+      contains
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.VerticalCoordinate" class="md-nav__link">
+    <span class="md-ellipsis">
+      VerticalCoordinate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VerticalCoordinate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.VerticalCoordinate.relative" class="md-nav__link">
+    <span class="md-ellipsis">
+      relative
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.VerticalCoordinate.page_number" class="md-nav__link">
+    <span class="md-ellipsis">
+      page_number
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.VerticalCoordinate.shift" class="md-nav__link">
+    <span class="md-ellipsis">
+      shift
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.VerticalPosition" class="md-nav__link">
+    <span class="md-ellipsis">
+      VerticalPosition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.silent_pdfplumber" class="md-nav__link">
+    <span class="md-ellipsis">
+      silent_pdfplumber
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.get_position" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_position
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.left_position_join" class="md-nav__link">
+    <span class="md-ellipsis">
+      left_position_join
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position_union" class="md-nav__link">
+    <span class="md-ellipsis">
+      position_union
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modules
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#document-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document Model
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document" class="md-nav__link">
+    <span class="md-ellipsis">
+      document
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Document" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Document">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Document.n_pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      n_pages
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Page" class="md-nav__link">
+    <span class="md-ellipsis">
+      Page
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Page.im" class="md-nav__link">
+    <span class="md-ellipsis">
+      im
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Page.plot_on" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_on
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.TextAnchor" class="md-nav__link">
+    <span class="md-ellipsis">
+      TextAnchor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Word" class="md-nav__link">
+    <span class="md-ellipsis">
+      Word
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Word">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Word.line" class="md-nav__link">
+    <span class="md-ellipsis">
+      line
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Word.chars" class="md-nav__link">
+    <span class="md-ellipsis">
+      chars
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Char" class="md-nav__link">
+    <span class="md-ellipsis">
+      Char
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Char">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Char.word" class="md-nav__link">
+    <span class="md-ellipsis">
+      word
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Char.line" class="md-nav__link">
+    <span class="md-ellipsis">
+      line
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Line" class="md-nav__link">
+    <span class="md-ellipsis">
+      Line
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Line.words" class="md-nav__link">
+    <span class="md-ellipsis">
+      words
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Line.chars" class="md-nav__link">
+    <span class="md-ellipsis">
+      chars
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.get_filelength" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_filelength
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.words_of_line" class="md-nav__link">
+    <span class="md-ellipsis">
+      words_of_line
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.line_of_word" class="md-nav__link">
+    <span class="md-ellipsis">
+      line_of_word
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.chars_of_word" class="md-nav__link">
+    <span class="md-ellipsis">
+      chars_of_word
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.word_of_char" class="md-nav__link">
+    <span class="md-ellipsis">
+      word_of_char
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="word_of_char">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#positions-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Positions &amp; Coordinates
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position" class="md-nav__link">
+    <span class="md-ellipsis">
+      position
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.VerticalCoordinate" class="md-nav__link">
+    <span class="md-ellipsis">
+      VerticalCoordinate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VerticalCoordinate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.VerticalCoordinate.relative" class="md-nav__link">
+    <span class="md-ellipsis">
+      relative
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.VerticalCoordinate.page_number" class="md-nav__link">
+    <span class="md-ellipsis">
+      page_number
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.VerticalCoordinate.shift" class="md-nav__link">
+    <span class="md-ellipsis">
+      shift
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.HorizontalCoordinate" class="md-nav__link">
+    <span class="md-ellipsis">
+      HorizontalCoordinate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HorizontalCoordinate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.HorizontalCoordinate.relative" class="md-nav__link">
+    <span class="md-ellipsis">
+      relative
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.HorizontalCoordinate.page_number" class="md-nav__link">
+    <span class="md-ellipsis">
+      page_number
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.HorizontalCoordinate.shift" class="md-nav__link">
+    <span class="md-ellipsis">
+      shift
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.VerticalPosition" class="md-nav__link">
+    <span class="md-ellipsis">
+      VerticalPosition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.HorizontalPosition" class="md-nav__link">
+    <span class="md-ellipsis">
+      HorizontalPosition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Position
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Position">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position.vertical" class="md-nav__link">
+    <span class="md-ellipsis">
+      vertical
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position.horizontal" class="md-nav__link">
+    <span class="md-ellipsis">
+      horizontal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position.crop" class="md-nav__link">
+    <span class="md-ellipsis">
+      crop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position.show" class="md-nav__link">
+    <span class="md-ellipsis">
+      show
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position.bbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      bbox
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position.plot_on_page" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_on_page
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position.contains" class="md-nav__link">
+    <span class="md-ellipsis">
+      contains
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.PdfAnchor" class="md-nav__link">
+    <span class="md-ellipsis">
+      PdfAnchor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PdfAnchor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.PdfAnchor.position" class="md-nav__link">
+    <span class="md-ellipsis">
+      position
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.PdfAnchor.horizontal" class="md-nav__link">
+    <span class="md-ellipsis">
+      horizontal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.PdfAnchor.vertical" class="md-nav__link">
+    <span class="md-ellipsis">
+      vertical
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.PdfAnchor.show" class="md-nav__link">
+    <span class="md-ellipsis">
+      show
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.PdfAnchor.binary_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      binary_content
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.PdfAnchor.plot_on_page" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_on_page
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.get_position" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_position
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.position_union" class="md-nav__link">
+    <span class="md-ellipsis">
+      position_union
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.left_position_join" class="md-nav__link">
+    <span class="md-ellipsis">
+      left_position_join
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="left_position_join">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pdf-io-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      PDF IO Helpers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader" class="md-nav__link">
+    <span class="md-ellipsis">
+      pdf_reader
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader.Crop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader.Crop.im" class="md-nav__link">
+    <span class="md-ellipsis">
+      im
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader.Crop.buffer" class="md-nav__link">
+    <span class="md-ellipsis">
+      buffer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader.Crop.bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      bytes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader.Crop.save" class="md-nav__link">
+    <span class="md-ellipsis">
+      save
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader.silent" class="md-nav__link">
+    <span class="md-ellipsis">
+      silent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader.silent_pdfplumber" class="md-nav__link">
+    <span class="md-ellipsis">
+      silent_pdfplumber
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="silent_pdfplumber">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent-utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agent Utilities
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      agent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.agent.DocumentAgent" class="md-nav__link">
+    <span class="md-ellipsis">
+      DocumentAgent
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DocumentAgent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.agent.DocumentAgent.anchor_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      anchor_content
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.agent.DocumentAgent.model_post_init" class="md-nav__link">
+    <span class="md-ellipsis">
+      model_post_init
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.agent.DocumentAgent.run_sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      run_sync
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#package" class="md-nav__link">
+    <span class="md-ellipsis">
+      Package
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma" class="md-nav__link">
+    <span class="md-ellipsis">
+      pyntagma
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.Document" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Document">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Document.n_pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      n_pages
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.Line" class="md-nav__link">
+    <span class="md-ellipsis">
+      Line
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Line.words" class="md-nav__link">
+    <span class="md-ellipsis">
+      words
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Line.chars" class="md-nav__link">
+    <span class="md-ellipsis">
+      chars
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.Page" class="md-nav__link">
+    <span class="md-ellipsis">
+      Page
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Page.im" class="md-nav__link">
+    <span class="md-ellipsis">
+      im
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Page.plot_on" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_on
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.Word" class="md-nav__link">
+    <span class="md-ellipsis">
+      Word
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Word">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Word.line" class="md-nav__link">
+    <span class="md-ellipsis">
+      line
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Word.chars" class="md-nav__link">
+    <span class="md-ellipsis">
+      chars
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.Crop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Crop.im" class="md-nav__link">
+    <span class="md-ellipsis">
+      im
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Crop.buffer" class="md-nav__link">
+    <span class="md-ellipsis">
+      buffer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Crop.bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      bytes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Crop.save" class="md-nav__link">
+    <span class="md-ellipsis">
+      save
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.HorizontalCoordinate" class="md-nav__link">
+    <span class="md-ellipsis">
+      HorizontalCoordinate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HorizontalCoordinate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.HorizontalCoordinate.relative" class="md-nav__link">
+    <span class="md-ellipsis">
+      relative
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.HorizontalCoordinate.page_number" class="md-nav__link">
+    <span class="md-ellipsis">
+      page_number
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.HorizontalCoordinate.shift" class="md-nav__link">
+    <span class="md-ellipsis">
+      shift
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.HorizontalPosition" class="md-nav__link">
+    <span class="md-ellipsis">
+      HorizontalPosition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.PdfAnchor" class="md-nav__link">
+    <span class="md-ellipsis">
+      PdfAnchor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PdfAnchor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.PdfAnchor.position" class="md-nav__link">
+    <span class="md-ellipsis">
+      position
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.PdfAnchor.horizontal" class="md-nav__link">
+    <span class="md-ellipsis">
+      horizontal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.PdfAnchor.vertical" class="md-nav__link">
+    <span class="md-ellipsis">
+      vertical
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.PdfAnchor.show" class="md-nav__link">
+    <span class="md-ellipsis">
+      show
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.PdfAnchor.binary_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      binary_content
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.PdfAnchor.plot_on_page" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_on_page
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.Position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Position
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Position">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Position.vertical" class="md-nav__link">
+    <span class="md-ellipsis">
+      vertical
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Position.horizontal" class="md-nav__link">
+    <span class="md-ellipsis">
+      horizontal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Position.crop" class="md-nav__link">
+    <span class="md-ellipsis">
+      crop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Position.show" class="md-nav__link">
+    <span class="md-ellipsis">
+      show
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Position.bbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      bbox
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Position.plot_on_page" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_on_page
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.Position.contains" class="md-nav__link">
+    <span class="md-ellipsis">
+      contains
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.VerticalCoordinate" class="md-nav__link">
+    <span class="md-ellipsis">
+      VerticalCoordinate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VerticalCoordinate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.VerticalCoordinate.relative" class="md-nav__link">
+    <span class="md-ellipsis">
+      relative
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.VerticalCoordinate.page_number" class="md-nav__link">
+    <span class="md-ellipsis">
+      page_number
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.VerticalCoordinate.shift" class="md-nav__link">
+    <span class="md-ellipsis">
+      shift
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.VerticalPosition" class="md-nav__link">
+    <span class="md-ellipsis">
+      VerticalPosition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.silent_pdfplumber" class="md-nav__link">
+    <span class="md-ellipsis">
+      silent_pdfplumber
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.get_position" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_position
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.left_position_join" class="md-nav__link">
+    <span class="md-ellipsis">
+      left_position_join
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position_union" class="md-nav__link">
+    <span class="md-ellipsis">
+      position_union
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modules
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#document-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document Model
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document" class="md-nav__link">
+    <span class="md-ellipsis">
+      document
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Document" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Document">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Document.n_pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      n_pages
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Page" class="md-nav__link">
+    <span class="md-ellipsis">
+      Page
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Page.im" class="md-nav__link">
+    <span class="md-ellipsis">
+      im
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Page.plot_on" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_on
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.TextAnchor" class="md-nav__link">
+    <span class="md-ellipsis">
+      TextAnchor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Word" class="md-nav__link">
+    <span class="md-ellipsis">
+      Word
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Word">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Word.line" class="md-nav__link">
+    <span class="md-ellipsis">
+      line
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Word.chars" class="md-nav__link">
+    <span class="md-ellipsis">
+      chars
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Char" class="md-nav__link">
+    <span class="md-ellipsis">
+      Char
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Char">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Char.word" class="md-nav__link">
+    <span class="md-ellipsis">
+      word
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Char.line" class="md-nav__link">
+    <span class="md-ellipsis">
+      line
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Line" class="md-nav__link">
+    <span class="md-ellipsis">
+      Line
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Line.words" class="md-nav__link">
+    <span class="md-ellipsis">
+      words
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.document.Line.chars" class="md-nav__link">
+    <span class="md-ellipsis">
+      chars
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.get_filelength" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_filelength
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.words_of_line" class="md-nav__link">
+    <span class="md-ellipsis">
+      words_of_line
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.line_of_word" class="md-nav__link">
+    <span class="md-ellipsis">
+      line_of_word
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.chars_of_word" class="md-nav__link">
+    <span class="md-ellipsis">
+      chars_of_word
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.document.word_of_char" class="md-nav__link">
+    <span class="md-ellipsis">
+      word_of_char
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="word_of_char">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#positions-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Positions &amp; Coordinates
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position" class="md-nav__link">
+    <span class="md-ellipsis">
+      position
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.VerticalCoordinate" class="md-nav__link">
+    <span class="md-ellipsis">
+      VerticalCoordinate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VerticalCoordinate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.VerticalCoordinate.relative" class="md-nav__link">
+    <span class="md-ellipsis">
+      relative
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.VerticalCoordinate.page_number" class="md-nav__link">
+    <span class="md-ellipsis">
+      page_number
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.VerticalCoordinate.shift" class="md-nav__link">
+    <span class="md-ellipsis">
+      shift
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.HorizontalCoordinate" class="md-nav__link">
+    <span class="md-ellipsis">
+      HorizontalCoordinate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HorizontalCoordinate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.HorizontalCoordinate.relative" class="md-nav__link">
+    <span class="md-ellipsis">
+      relative
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.HorizontalCoordinate.page_number" class="md-nav__link">
+    <span class="md-ellipsis">
+      page_number
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.HorizontalCoordinate.shift" class="md-nav__link">
+    <span class="md-ellipsis">
+      shift
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.VerticalPosition" class="md-nav__link">
+    <span class="md-ellipsis">
+      VerticalPosition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.HorizontalPosition" class="md-nav__link">
+    <span class="md-ellipsis">
+      HorizontalPosition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Position
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Position">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position.vertical" class="md-nav__link">
+    <span class="md-ellipsis">
+      vertical
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position.horizontal" class="md-nav__link">
+    <span class="md-ellipsis">
+      horizontal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position.crop" class="md-nav__link">
+    <span class="md-ellipsis">
+      crop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position.show" class="md-nav__link">
+    <span class="md-ellipsis">
+      show
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position.bbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      bbox
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position.plot_on_page" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_on_page
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.Position.contains" class="md-nav__link">
+    <span class="md-ellipsis">
+      contains
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.PdfAnchor" class="md-nav__link">
+    <span class="md-ellipsis">
+      PdfAnchor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PdfAnchor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.PdfAnchor.position" class="md-nav__link">
+    <span class="md-ellipsis">
+      position
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.PdfAnchor.horizontal" class="md-nav__link">
+    <span class="md-ellipsis">
+      horizontal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.PdfAnchor.vertical" class="md-nav__link">
+    <span class="md-ellipsis">
+      vertical
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.PdfAnchor.show" class="md-nav__link">
+    <span class="md-ellipsis">
+      show
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.PdfAnchor.binary_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      binary_content
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.position.PdfAnchor.plot_on_page" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_on_page
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.get_position" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_position
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.position_union" class="md-nav__link">
+    <span class="md-ellipsis">
+      position_union
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.position.left_position_join" class="md-nav__link">
+    <span class="md-ellipsis">
+      left_position_join
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="left_position_join">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pdf-io-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      PDF IO Helpers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader" class="md-nav__link">
+    <span class="md-ellipsis">
+      pdf_reader
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader.Crop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader.Crop.im" class="md-nav__link">
+    <span class="md-ellipsis">
+      im
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader.Crop.buffer" class="md-nav__link">
+    <span class="md-ellipsis">
+      buffer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader.Crop.bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      bytes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader.Crop.save" class="md-nav__link">
+    <span class="md-ellipsis">
+      save
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader.silent" class="md-nav__link">
+    <span class="md-ellipsis">
+      silent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.pdf_reader.silent_pdfplumber" class="md-nav__link">
+    <span class="md-ellipsis">
+      silent_pdfplumber
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="silent_pdfplumber">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent-utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agent Utilities
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      agent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.pyntagma.agent.DocumentAgent" class="md-nav__link">
+    <span class="md-ellipsis">
+      DocumentAgent
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DocumentAgent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.agent.DocumentAgent.anchor_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      anchor_content
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.agent.DocumentAgent.model_post_init" class="md-nav__link">
+    <span class="md-ellipsis">
+      model_post_init
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.pyntagma.agent.DocumentAgent.run_sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      run_sync
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="api-reference">API Reference</h1>
+<p>This section is auto-generated from the source code using mkdocstrings.</p>
+<h2 id="package">Package</h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="src.pyntagma"></a>
+    <div class="doc doc-contents first">
+
+        <p>Pyntagma: PDF document processing package.</p>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.Document" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">Document</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>A document consisting of multiple PDF files.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.Document.n_pages" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">n_pages</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-cached"><code>cached</code></small>
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">n_pages</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the number of pages in the document.</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.Line" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">Line</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="TextAnchor (src.pyntagma.document.TextAnchor)" href="#src.pyntagma.document.TextAnchor">TextAnchor</a></code></p>
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.Line.words" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">words</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-cached"><code>cached</code></small>
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">words</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Extract words from the line.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.Line.chars" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">chars</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-cached"><code>cached</code></small>
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">chars</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Extract chars from the line.</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.Page" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">Page</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>A single page within a <code>Document</code>.</p>
+<p>Indices are available both relative to the file (<code>file_page_number</code>) and
+relative to the full document (<code>page_number</code>).</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.Page.im" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">im</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">im</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the image of the page.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.Page.plot_on" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">plot_on</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">plot_on</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Plot the page on the given items.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.Word" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">Word</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="TextAnchor (src.pyntagma.document.TextAnchor)" href="#src.pyntagma.document.TextAnchor">TextAnchor</a></code></p>
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.Word.line" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">line</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-cached"><code>cached</code></small>
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">line</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Find the line that contains the word.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.Word.chars" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">chars</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">chars</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Extract chars from the word.</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.Crop" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">Crop</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>Represents a rectangular crop on a PDF page and utilities to render it.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.Crop.im" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">im</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">im</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the PIL image for this crop (respects padding/resolution).</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.Crop.buffer" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">buffer</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">buffer</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the cropped image as a BytesIO object.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.Crop.bytes" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">bytes</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nb">bytes</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the cropped image as bytes.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.Crop.save" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">save</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">save</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;crop.png&#39;</span><span class="p">))</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Save the cropped image to a file.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.HorizontalCoordinate" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">HorizontalCoordinate</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>A horizontal coordinate (x) bound to a specific page.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.HorizontalCoordinate.relative" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">relative</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">relative</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the x position normalized to page width (0..1).</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.HorizontalCoordinate.page_number" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">page_number</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">page_number</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the document-level page index for this coordinate.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.HorizontalCoordinate.shift" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">shift</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">shift</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return a new coordinate shifted by <code>delta</code> within page bounds.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.HorizontalPosition" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">HorizontalPosition</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>Horizontal span (x0..x1) on a page.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.PdfAnchor" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">PdfAnchor</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>A base class for anchors in a PDF document.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.PdfAnchor.position" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">position</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">position</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the position of the anchor.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.PdfAnchor.horizontal" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">horizontal</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">horizontal</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the horizontal position of the anchor.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.PdfAnchor.vertical" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">vertical</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">vertical</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the vertical position of the anchor.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.PdfAnchor.show" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">show</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">show</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Show this crop.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.PdfAnchor.binary_content" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">binary_content</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">binary_content</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Binary content of this anchor's crop for multimodal prompts.</p>
+<p>Uses the cropped PNG bytes of the anchor's position.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.PdfAnchor.plot_on_page" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">plot_on_page</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">plot_on_page</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Plot this anchor on the page.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.Position" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">Position</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>A rectangular region on a page, expressed by four coordinates.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.Position.vertical" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">vertical</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">vertical</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the vertical span of this position.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.Position.horizontal" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">horizontal</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">horizontal</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the horizontal span of this position.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.Position.crop" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">crop</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">crop</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return a <code>Crop</code> representing this position on a single page.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.Position.show" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">show</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">show</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Display the position as a crop.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.Position.bbox" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">bbox</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">bbox</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the bounding box of the position.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.Position.plot_on_page" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">plot_on_page</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">plot_on_page</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Plot this position on its page and return the page image object.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.Position.contains" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">contains</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">contains</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return True if <code>other</code> is fully inside this position.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.VerticalCoordinate" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">VerticalCoordinate</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>A vertical coordinate (y) bound to a specific page.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.VerticalCoordinate.relative" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">relative</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">relative</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the y position normalized to page height (0..1).</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.VerticalCoordinate.page_number" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">page_number</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">page_number</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the document-level page index for this coordinate.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.VerticalCoordinate.shift" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">shift</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">shift</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Shift the vertical coordinate by a given delta.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.VerticalPosition" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">VerticalPosition</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>Vertical span (top..bottom) on a page sequence.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="src.pyntagma.silent_pdfplumber" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">silent_pdfplumber</span>
+
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">silent_pdfplumber</span><span class="p">(</span><span class="n">path_or_fp</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Open a pdfplumber PDF while suppressing output within the block.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="src.pyntagma.get_position" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">get_position</span>
+
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_position</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return a <code>Position</code> from an item or raise if unavailable.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="src.pyntagma.left_position_join" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">left_position_join</span>
+
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">left_position_join</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">after</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">uniquely</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">keep_empty_x</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_distance</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Bind two lists together based on their vertical positions.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="src.pyntagma.position_union" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">position_union</span>
+
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">position_union</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the minimal <code>Position</code> enclosing all items' positions.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="modules">Modules</h2>
+<h3 id="document-model">Document Model</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="src.pyntagma.document"></a>
+    <div class="doc doc-contents first">
+
+        <p>High-level document model built on top of pdfplumber.</p>
+<p>Provides <code>Document</code>, <code>Page</code> and text primitives (<code>Line</code>, <code>Word</code>, <code>Char</code>) with
+geometric positions, plus helpers to navigate between them.</p>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.document.Document" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">Document</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>A document consisting of multiple PDF files.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.document.Document.n_pages" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">n_pages</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-cached"><code>cached</code></small>
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">n_pages</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the number of pages in the document.</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.document.Page" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">Page</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>A single page within a <code>Document</code>.</p>
+<p>Indices are available both relative to the file (<code>file_page_number</code>) and
+relative to the full document (<code>page_number</code>).</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.document.Page.im" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">im</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">im</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the image of the page.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.document.Page.plot_on" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">plot_on</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">plot_on</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Plot the page on the given items.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.document.TextAnchor" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">TextAnchor</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="PdfAnchor (src.pyntagma.position.PdfAnchor)" href="#src.pyntagma.position.PdfAnchor">PdfAnchor</a></code></p>
+
+
+        <p>Base class for textual anchors with absolute coordinates on a page.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.document.Word" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">Word</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="TextAnchor (src.pyntagma.document.TextAnchor)" href="#src.pyntagma.document.TextAnchor">TextAnchor</a></code></p>
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.document.Word.line" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">line</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-cached"><code>cached</code></small>
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">line</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Find the line that contains the word.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.document.Word.chars" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">chars</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">chars</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Extract chars from the word.</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.document.Char" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">Char</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="TextAnchor (src.pyntagma.document.TextAnchor)" href="#src.pyntagma.document.TextAnchor">TextAnchor</a></code></p>
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.document.Char.word" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">word</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">word</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Find the word that contains the char.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.document.Char.line" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">line</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">line</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Find the line that contains the char.</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.document.Line" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">Line</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="TextAnchor (src.pyntagma.document.TextAnchor)" href="#src.pyntagma.document.TextAnchor">TextAnchor</a></code></p>
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.document.Line.words" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">words</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-cached"><code>cached</code></small>
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">words</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Extract words from the line.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.document.Line.chars" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">chars</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-cached"><code>cached</code></small>
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">chars</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Extract chars from the line.</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="src.pyntagma.document.get_filelength" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">get_filelength</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-cached"><code>cached</code></small>
+  </span>
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_filelength</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the number of pages for a PDF file.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="src.pyntagma.document.words_of_line" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">words_of_line</span>
+
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">words_of_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Extract words from a line.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="src.pyntagma.document.line_of_word" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">line_of_word</span>
+
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">line_of_word</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Find the line that contains the word.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="src.pyntagma.document.chars_of_word" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">chars_of_word</span>
+
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">chars_of_word</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Extract chars belonging to a given <code>Word</code>.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="src.pyntagma.document.word_of_char" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">word_of_char</span>
+
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">word_of_char</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the <code>Word</code> that contains the given <code>Char</code>.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h3 id="positions-coordinates">Positions &amp; Coordinates</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="src.pyntagma.position"></a>
+    <div class="doc doc-contents first">
+
+        <p>Coordinate and position primitives for PDF pages.</p>
+<p>Defines horizontal/vertical coordinates and composite positions with helpers
+for arithmetic, comparison and visualization.</p>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.position.VerticalCoordinate" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">VerticalCoordinate</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>A vertical coordinate (y) bound to a specific page.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.position.VerticalCoordinate.relative" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">relative</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">relative</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the y position normalized to page height (0..1).</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.position.VerticalCoordinate.page_number" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">page_number</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">page_number</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the document-level page index for this coordinate.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.position.VerticalCoordinate.shift" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">shift</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">shift</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Shift the vertical coordinate by a given delta.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.position.HorizontalCoordinate" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">HorizontalCoordinate</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>A horizontal coordinate (x) bound to a specific page.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.position.HorizontalCoordinate.relative" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">relative</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">relative</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the x position normalized to page width (0..1).</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.position.HorizontalCoordinate.page_number" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">page_number</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">page_number</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the document-level page index for this coordinate.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.position.HorizontalCoordinate.shift" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">shift</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">shift</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return a new coordinate shifted by <code>delta</code> within page bounds.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.position.VerticalPosition" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">VerticalPosition</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>Vertical span (top..bottom) on a page sequence.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.position.HorizontalPosition" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">HorizontalPosition</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>Horizontal span (x0..x1) on a page.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.position.Position" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">Position</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>A rectangular region on a page, expressed by four coordinates.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.position.Position.vertical" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">vertical</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">vertical</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the vertical span of this position.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.position.Position.horizontal" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">horizontal</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">horizontal</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the horizontal span of this position.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.position.Position.crop" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">crop</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">crop</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return a <code>Crop</code> representing this position on a single page.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.position.Position.show" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">show</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">show</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Display the position as a crop.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.position.Position.bbox" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">bbox</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">bbox</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the bounding box of the position.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.position.Position.plot_on_page" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">plot_on_page</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">plot_on_page</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Plot this position on its page and return the page image object.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.position.Position.contains" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">contains</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">contains</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return True if <code>other</code> is fully inside this position.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.position.PdfAnchor" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">PdfAnchor</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>A base class for anchors in a PDF document.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.position.PdfAnchor.position" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">position</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">position</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the position of the anchor.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.position.PdfAnchor.horizontal" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">horizontal</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">horizontal</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the horizontal position of the anchor.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.position.PdfAnchor.vertical" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">vertical</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">vertical</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the vertical position of the anchor.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.position.PdfAnchor.show" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">show</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">show</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Show this crop.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.position.PdfAnchor.binary_content" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">binary_content</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">binary_content</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Binary content of this anchor's crop for multimodal prompts.</p>
+<p>Uses the cropped PNG bytes of the anchor's position.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.position.PdfAnchor.plot_on_page" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">plot_on_page</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">plot_on_page</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Plot this anchor on the page.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="src.pyntagma.position.get_position" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">get_position</span>
+
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_position</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return a <code>Position</code> from an item or raise if unavailable.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="src.pyntagma.position.position_union" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">position_union</span>
+
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">position_union</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the minimal <code>Position</code> enclosing all items' positions.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="src.pyntagma.position.left_position_join" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">left_position_join</span>
+
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">left_position_join</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">after</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">uniquely</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">keep_empty_x</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_distance</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Bind two lists together based on their vertical positions.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h3 id="pdf-io-helpers">PDF IO Helpers</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="src.pyntagma.pdf_reader"></a>
+    <div class="doc doc-contents first">
+
+        <p>Thin wrappers around pdfplumber for quiet PDF IO and cropping.</p>
+<p>Includes a <code>silent</code> context manager to suppress stdout/stderr and a <code>Crop</code>
+utility for extracting regions from a page as images/bytes.</p>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.pdf_reader.Crop" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">Crop</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>Represents a rectangular crop on a PDF page and utilities to render it.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.pdf_reader.Crop.im" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">im</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">im</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the PIL image for this crop (respects padding/resolution).</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.pdf_reader.Crop.buffer" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">buffer</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">buffer</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the cropped image as a BytesIO object.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.pdf_reader.Crop.bytes" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">bytes</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nb">bytes</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Get the cropped image as bytes.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.pdf_reader.Crop.save" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">save</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">save</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;crop.png&#39;</span><span class="p">))</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Save the cropped image to a file.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="src.pyntagma.pdf_reader.silent" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">silent</span>
+
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">silent</span><span class="p">()</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Temporarily silence stdout/stderr and lower logging during a block.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="src.pyntagma.pdf_reader.silent_pdfplumber" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">silent_pdfplumber</span>
+
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">silent_pdfplumber</span><span class="p">(</span><span class="n">path_or_fp</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Open a pdfplumber PDF while suppressing output within the block.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h3 id="agent-utilities">Agent Utilities</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="src.pyntagma.agent"></a>
+    <div class="doc doc-contents first">
+
+        <p>Agent utilities for reasoning over PDF anchors.</p>
+<p>This module wires PydanticAI's <code>Agent</code> to work with Pyntagma PDF anchors,
+optionally attaching cropped image bytes to prompts for multimodal models.</p>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="src.pyntagma.agent.DocumentAgent" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">DocumentAgent</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>Small wrapper around a PydanticAI <code>Agent</code> bound to a PDF anchor.</p>
+<ul>
+<li>Attaches an anchor crop as <code>BinaryContent</code> to the first user prompt when
+  <code>include_image=True</code> (default on first run), enabling multimodal context.</li>
+<li>Allows specifying an <code>output_type</code> which is wrapped with <code>NativeOutput</code>
+  for certain models (e.g. Gemma on Ollama) to keep parsing consistent.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="src.pyntagma.agent.DocumentAgent.anchor_content" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">anchor_content</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">anchor_content</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the anchor's <code>BinaryContent</code> (PNG bytes of its crop).</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.agent.DocumentAgent.model_post_init" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">model_post_init</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">model_post_init</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Create the underlying PydanticAI agent after model init.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="src.pyntagma.agent.DocumentAgent.run_sync" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">run_sync</span>
+
+
+</h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">run_sync</span><span class="p">(</span><span class="n">user_prompt</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include_image</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Run the agent synchronously with optional image context.</p>
+<ul>
+<li>If <code>include_image</code> is True, append the anchor crop as BinaryContent to
+  the prompt. When <code>anchor</code> is provided, that anchor is used; otherwise
+  <code>self.anchor</code> is used.</li>
+<li><code>user_prompt</code> can be a string or a list of content items; the image is
+  appended appropriately.</li>
+</ul>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
