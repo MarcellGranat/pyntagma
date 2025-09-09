@@ -6,7 +6,17 @@ geometric positions, plus helpers to navigate between them.
 
 from functools import cached_property, lru_cache
 from pathlib import Path
-from typing import Iterable
+from typing import (
+    Any,
+    Callable,
+    Generic,
+    Iterable,
+    Iterator,
+    Self,
+    TypeVar,
+    Union,
+    overload,
+)
 
 from pdfplumber.display import PageImage
 from pydantic import BaseModel
@@ -123,16 +133,16 @@ class Page(BaseModel):
     document: Document
 
     @property
-    def words(self) -> list["Word"]:
-        return _get_words(self)
+    def words(self) -> "Words":
+        return Words(_get_words(self))
 
     @property
-    def lines(self) -> list["Line"]:
-        return _get_lines(self)
+    def lines(self) -> "Lines":
+        return Lines(_get_lines(self))
 
     @property
-    def chars(self) -> list["Char"]:
-        return _get_chars(self)
+    def chars(self) -> "Chars":
+        return Chars(_get_chars(self))
 
     @property
     def height(self) -> float:
@@ -261,6 +271,165 @@ class TextAnchor(PdfAnchor, frozen=True):
             )
         )
 
+    def __str__(self) -> str:
+        return f"{self.__class__.__name__}(text='{self.text}')"
+
+
+T = TypeVar("T")
+
+
+class TextAnchorList(Generic[T]):
+    def __init__(self, items: Iterable[T]):
+        self.items: list[T] = list(items)
+
+    def __iter__(self) -> Iterator[T]:
+        return iter(self.items)
+
+    def __len__(self) -> int:
+        return len(self.items)
+
+    @overload
+    def __getitem__(self, index: int) -> T: ...
+    @overload
+    def __getitem__(self, index: slice) -> Self: ...
+    @overload
+    def __getitem__(self, index: str) -> T: ...
+    @overload
+    def __getitem__(self, index: Iterable[int]) -> Self: ...
+    @overload
+    def __getitem__(self, index: Iterable[bool]) -> Self: ...
+    @overload
+    def __getitem__(self, index: Iterable[str]) -> Self: ...
+    @overload
+    def __getitem__(self, index: Callable[[T], bool]) -> Self: ...
+
+    def __getitem__(
+        self,
+        index: Union[
+            int,
+            slice,
+            str,
+            Iterable[int],
+            Iterable[bool],
+            Iterable[str],
+            Callable[[T], bool],
+        ],
+    ):
+        # int
+        if isinstance(index, int):
+            return self.items[index]
+
+        # slice
+        if isinstance(index, slice):
+            return self.__class__(self.items[index])
+
+        # single string -> match by .text
+        if isinstance(index, str):
+            for it in self.items:
+                if getattr(it, "text", None) == index:
+                    return it
+            raise KeyError(f"No item found with text '{index}'")
+
+        # callable predicate -> filter
+        if callable(index):
+            pred: Callable[[T], bool] = index
+            return self.__class__([it for it in self.items if pred(it)])
+
+        # iterables
+        if isinstance(index, Iterable):
+            seq = list(index)
+
+            # list of bools -> mask
+            if all(isinstance(x, bool) for x in seq):
+                if len(seq) != len(self.items):
+                    raise IndexError("Boolean mask length must match list length")
+                return self.__class__([it for it, keep in zip(self.items, seq) if keep])
+
+            # list of ints -> positional take
+            if all(isinstance(x, int) for x in seq):
+                return self.__class__([self.items[i] for i in seq])
+
+            # list of str -> match many by .text (keeps order of strings)
+            if all(isinstance(x, str) for x in seq):
+                want = set(seq)
+                return self.__class__(
+                    [it for it in self.items if getattr(it, "text", None) in want]
+                )
+
+        raise TypeError(
+            "Unsupported index type. Use int, slice, str, iterable of int/bool/str, or a predicate function."
+        )
+
+    def sort(self, key: Callable[[T], Any], reverse: bool = False) -> Self:
+        return self.__class__(sorted(self.items, key=key, reverse=reverse))
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, TextAnchorList):
+            raise NotImplementedError(
+                f"Cannot compare {self.__class__.__name__} with {other.__class__.__name__}"
+            )
+        return self.items == other.items
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}({len(self.items)} items)"
+
+
+class Words(TextAnchorList["Word"]):
+    def __init__(self, items: Iterable["Word"]):
+        self.items = list(items)
+
+    @property
+    def lines(self) -> "Lines":
+        _lines = set()
+        for word in self.items:
+            _lines.add(word.line)
+        return Lines(_lines)
+
+    @property
+    def chars(self) -> "Chars":
+        _chars = []
+        for word in self.items:
+            _chars.extend(word.chars)
+        return Chars(_chars)
+
+
+class Lines(TextAnchorList["Line"]):
+    def __init__(self, items: Iterable["Line"]):
+        self.items = list(items)
+
+    @property
+    def words(self) -> Words:
+        _words = []
+        for line in self.items:
+            _words.extend(line.words)
+        return Words(_words)
+
+    @property
+    def chars(self) -> "Chars":
+        _chars = []
+        for line in self.items:
+            _chars.extend(line.chars)
+        return Chars(_chars)
+
+
+class Chars(TextAnchorList["Char"]):
+    def __init__(self, items: Iterable["Char"]):
+        self.items = list(items)
+
+    @property
+    def words(self) -> "Words":
+        _words = set()
+        for char in self.items:
+            _words.add(char.word)
+        return Words(_words)
+
+    @property
+    def lines(self) -> "Lines":
+        _lines = set()
+        for char in self.items:
+            _lines.add(char.line)
+        return Lines(_lines)
+
 
 class Word(TextAnchor, frozen=True):
     @property
@@ -271,11 +440,11 @@ class Word(TextAnchor, frozen=True):
         return line_of_word(self)
 
     @property
-    def chars(self) -> list["Char"]:
+    def chars(self) -> Chars:
         """
         Extract chars from the word.
         """
-        return chars_of_word(self)
+        return Chars(chars_of_word(self))
 
 
 class Char(TextAnchor, frozen=True):
@@ -296,18 +465,19 @@ class Char(TextAnchor, frozen=True):
 
 class Line(TextAnchor, frozen=True):
     @property
-    def words(self) -> list[Word]:
+    def words(self) -> Words:
         """
         Extract words from the line.
         """
-        return words_of_line(self)
+        return Words(words_of_line(self))
 
     @property
-    def chars(self) -> list["Char"]:
+    def chars(self) -> Chars:
         """
         Extract chars from the line.
         """
-        _chars = []
+        _chars = set()
         for word in self.words:
-            _chars.extend(word.chars)
-        return _chars
+            for char in word.chars:
+                _chars.add(char)
+        return Chars(_chars)
