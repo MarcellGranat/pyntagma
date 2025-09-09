@@ -27,6 +27,7 @@ from src.pyntagma.position import (
     PdfAnchor,
     Position,
     VerticalCoordinate,
+    position_union,
 )
 
 
@@ -362,6 +363,10 @@ class TextAnchorList(Generic[T]):
 
     def sort(self, key: Callable[[T], Any], reverse: bool = False) -> Self:
         return self.__class__(sorted(self.items, key=key, reverse=reverse))
+
+    @property
+    def position(self) -> Position:
+        return position_union(item.position for item in self.items)  # type: ignore "TextAnchor type only fixed in subclasses"
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, TextAnchorList):
