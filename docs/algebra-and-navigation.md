@@ -1,4 +1,4 @@
-# Algebra vs. Bidirectional Navigation
+# Algebra and Bidirectional Navigation
 
 Pyntagma offers two complementary ways to work with documents:
 
