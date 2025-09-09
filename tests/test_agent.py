@@ -6,7 +6,6 @@ from shutil import which
 
 import pytest
 from pydantic import BaseModel
-from pydantic_ai import NativeOutput
 
 from src.pyntagma import Document
 from src.pyntagma.agent import DocumentAgent, OllamaChatModel
@@ -74,10 +73,10 @@ doc = Document(files=test_files)
 
 
 model = OllamaChatModel()
-docagent = DocumentAgent(model=model, output_type=str, anchor=doc.pages[1].words[0])
 
 
-def test_run():
+def test_str_output():
+    docagent = DocumentAgent(model=model, output_type=str, anchor=doc.pages[1].words[0])
     chat_ = docagent.run_sync("What is on the image?")
     assert isinstance(chat_.output, str)
     print(chat_)
@@ -90,7 +89,7 @@ class MetaData(BaseModel):
 
 def test_run_with_type_for_agent():
     docagent = DocumentAgent(
-        model=model, output_type=NativeOutput(MetaData), anchor=doc.pages[1].words[0]
+        model=model, output_type=MetaData, anchor=doc.pages[1].words[0]
     )
 
     chat_ = docagent.run_sync("What is on the image? How many lettes does it contain?")
@@ -109,3 +108,26 @@ def test_run_with_type_for_run():
     assert isinstance(output.text, str)
     assert isinstance(output.n_characters, int)
     print(chat_)
+
+
+def test_run_multiple():
+    docagent = DocumentAgent(
+        model=model, output_type=MetaData, anchor=doc.pages[1].words[0]
+    )
+
+    chat1 = docagent.run_sync("What is on the image?")
+    assert isinstance(chat1.output.text, str)
+    print(chat1)
+
+    class Letters(BaseModel):
+        first_letter: str
+        last_letter: str
+
+    chat2 = docagent.run_sync(
+        "What is the first and the last letter on the image?",
+        output_type=Letters,
+        message_history=chat1.all_messages(),
+    )
+    assert chat2.output.first_letter == chat1.output.text[0]
+    assert chat2.output.last_letter in ["s", "-"]  # might fail sometimes "-"
+    print(chat2)
