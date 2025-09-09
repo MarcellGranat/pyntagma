@@ -15,6 +15,7 @@ from .pdf_reader import Crop
 
 class VerticalCoordinate(BaseModel):
     """A vertical coordinate (y) bound to a specific page."""
+
     page: Any
     value: float
 
@@ -126,6 +127,7 @@ class VerticalCoordinate(BaseModel):
 
 class HorizontalCoordinate(BaseModel):
     """A horizontal coordinate (x) bound to a specific page."""
+
     page: Any
     value: float
 
@@ -183,6 +185,7 @@ class HorizontalCoordinate(BaseModel):
 
 class VerticalPosition(BaseModel):
     """Vertical span (top..bottom) on a page sequence."""
+
     top: VerticalCoordinate
     bottom: VerticalCoordinate
 
@@ -214,6 +217,7 @@ class VerticalPosition(BaseModel):
 
 class HorizontalPosition(BaseModel):
     """Horizontal span (x0..x1) on a page."""
+
     x0: HorizontalCoordinate
     x1: HorizontalCoordinate
 
@@ -245,6 +249,7 @@ class HorizontalPosition(BaseModel):
 
 class Position(BaseModel):
     """A rectangular region on a page, expressed by four coordinates."""
+
     x0: HorizontalCoordinate
     x1: HorizontalCoordinate
     top: VerticalCoordinate
@@ -339,7 +344,7 @@ def position_union(items: Iterable) -> Position:
     return Position(x0=min_x0, x1=max_x1, top=min_top, bottom=max_bottom)
 
 
-class PdfAnchor(BaseModel):
+class PdfAnchor(BaseModel, frozen=True):
     """
     A base class for anchors in a PDF document.
     """

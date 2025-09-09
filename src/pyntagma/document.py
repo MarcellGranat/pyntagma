@@ -4,7 +4,7 @@ Provides `Document`, `Page` and text primitives (`Line`, `Word`, `Char`) with
 geometric positions, plus helpers to navigate between them.
 """
 
-from functools import cache, cached_property
+from functools import cached_property, lru_cache
 from pathlib import Path
 from typing import Iterable
 
@@ -20,11 +20,25 @@ from src.pyntagma.position import (
 )
 
 
-@cache
-def get_filelength(file: Path) -> int:
+@lru_cache(maxsize=128)
+def _get_file_length(file: Path) -> int:
     """Return the number of pages for a PDF file."""
     with silent_pdfplumber(file) as pdf:
         return len(pdf.pages)
+
+
+@lru_cache(maxsize=128)
+def _get_page_height(file: Path, page_number: int) -> float:
+    """Return the number of pages for a PDF file."""
+    with silent_pdfplumber(file) as pdf:
+        return pdf.pages[page_number].height
+
+
+@lru_cache(maxsize=128)
+def _get_page_width(file: Path, page_number: int) -> float:
+    """Return the number of pages for a PDF file."""
+    with silent_pdfplumber(file) as pdf:
+        return pdf.pages[page_number].width
 
 
 class Document(BaseModel):
@@ -40,7 +54,7 @@ class Document(BaseModel):
         index_in_document = 0
         files = sorted(self.files)
         for file in files:
-            num_pages = get_filelength(file)
+            num_pages = _get_file_length(file)
             for i in range(num_pages):
                 pages.append(
                     Page(
@@ -58,7 +72,7 @@ class Document(BaseModel):
         """
         Get the number of pages in the document.
         """
-        return len(self.pages)
+        return sum(_get_file_length(file) for file in self.files)
 
     def __len__(self):
         return self.n_pages
@@ -70,7 +84,7 @@ class Document(BaseModel):
         return f"Document(files={len(self.files)}, pages={len(self.pages)})"
 
 
-@cache
+@lru_cache(maxsize=128)
 def _get_words(page: "Page") -> list["Word"]:
     with silent_pdfplumber(page.path) as pdf:
         return [
@@ -79,7 +93,7 @@ def _get_words(page: "Page") -> list["Word"]:
         ]
 
 
-@cache
+@lru_cache(maxsize=128)
 def _get_lines(page: "Page") -> list["Line"]:
     with silent_pdfplumber(page.path) as pdf:
         return [
@@ -88,7 +102,7 @@ def _get_lines(page: "Page") -> list["Line"]:
         ]
 
 
-@cache
+@lru_cache(maxsize=128)
 def _get_chars(page: "Page") -> list["Char"]:
     with silent_pdfplumber(page.path) as pdf:
         return [
@@ -102,6 +116,7 @@ class Page(BaseModel):
     Indices are available both relative to the file (`file_page_number`) and
     relative to the full document (`page_number`).
     """
+
     path: Path
     file_page_number: int  # in the file
     page_number: int  # in the document
@@ -119,15 +134,13 @@ class Page(BaseModel):
     def chars(self) -> list["Char"]:
         return _get_chars(self)
 
-    @cached_property
+    @property
     def height(self) -> float:
-        with silent_pdfplumber(self.path) as pdf:
-            return pdf.pages[self.file_page_number].height
+        return _get_page_height(self.path, self.file_page_number)
 
-    @cached_property
+    @property
     def width(self) -> float:
-        with silent_pdfplumber(self.path) as pdf:
-            return pdf.pages[self.file_page_number].width
+        return _get_page_width(self.path, self.file_page_number)
 
     @property
     def im(self) -> PageImage:
@@ -167,6 +180,7 @@ class Page(BaseModel):
         return f"Page({self.path.name}, page_number={self.page_number})"
 
 
+@lru_cache(maxsize=128)
 def words_of_line(line: "Line") -> list["Word"]:
     """
     Extract words from a line.
@@ -183,6 +197,7 @@ def words_of_line(line: "Line") -> list["Word"]:
     return words
 
 
+@lru_cache(maxsize=128)
 def line_of_word(word: "Word") -> "Line":
     """
     Find the line that contains the word.
@@ -193,10 +208,9 @@ def line_of_word(word: "Word") -> "Line":
     raise ValueError("No line found for the word.")
 
 
+@lru_cache(maxsize=128)
 def chars_of_word(word: "Word") -> list["Char"]:
     """Extract chars belonging to a given `Word`."""
-    if not isinstance(word, Word):
-        raise ValueError("word must be an instance of Word.")
 
     chars = []
     for char in word.page.chars:
@@ -207,6 +221,7 @@ def chars_of_word(word: "Word") -> list["Char"]:
     return chars
 
 
+@lru_cache(maxsize=128)
 def word_of_char(char: "Char") -> "Word":
     """Return the `Word` that contains the given `Char`."""
     for word in char.page.words:
@@ -215,8 +230,9 @@ def word_of_char(char: "Char") -> "Word":
     raise ValueError("No word found for the char.")
 
 
-class TextAnchor(PdfAnchor):
+class TextAnchor(PdfAnchor, frozen=True):
     """Base class for textual anchors with absolute coordinates on a page."""
+
     text: str
     x0: float
     x1: float
@@ -246,8 +262,8 @@ class TextAnchor(PdfAnchor):
         )
 
 
-class Word(TextAnchor):
-    @cached_property
+class Word(TextAnchor, frozen=True):
+    @property
     def line(self) -> "Line":
         """
         Find the line that contains the word.
@@ -262,7 +278,7 @@ class Word(TextAnchor):
         return chars_of_word(self)
 
 
-class Char(TextAnchor):
+class Char(TextAnchor, frozen=True):
     @property
     def word(self) -> "Word":
         """
@@ -278,15 +294,15 @@ class Char(TextAnchor):
         return self.word.line
 
 
-class Line(TextAnchor):
-    @cached_property
+class Line(TextAnchor, frozen=True):
+    @property
     def words(self) -> list[Word]:
         """
         Extract words from the line.
         """
         return words_of_line(self)
 
-    @cached_property
+    @property
     def chars(self) -> list["Char"]:
         """
         Extract chars from the line.
