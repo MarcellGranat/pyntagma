@@ -1,6 +1,6 @@
 """Pyntagma: PDF document processing package."""
 
-from .document import Document, Line, Page, Word
+from .document import Char, Chars, Document, Line, Lines, Page, Word, Words
 from .pdf_reader import Crop, silent_pdfplumber
 from .position import (
     HorizontalCoordinate,
@@ -16,7 +16,7 @@ from .position import (
 
 __all__ = [
     "Document",
-    "Page", 
+    "Page",
     "Word",
     "Line",
     "Position",

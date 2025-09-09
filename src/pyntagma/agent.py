@@ -12,7 +12,7 @@ from pydantic_ai import Agent, NativeOutput
 from pydantic_ai.models.openai import OpenAIChatModel
 from pydantic_ai.providers.ollama import OllamaProvider
 
-from src.pyntagma.position import PdfAnchor
+from .position import PdfAnchor
 
 # Convenience factory for creating Ollama-backed chat models with defaults.
 OllamaChatModel = partial(

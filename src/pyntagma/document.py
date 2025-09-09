@@ -21,8 +21,8 @@ from typing import (
 from pdfplumber.display import PageImage
 from pydantic import BaseModel
 
-from src.pyntagma.pdf_reader import silent_pdfplumber
-from src.pyntagma.position import (
+from .pdf_reader import silent_pdfplumber
+from .position import (
     HorizontalCoordinate,
     PdfAnchor,
     Position,
