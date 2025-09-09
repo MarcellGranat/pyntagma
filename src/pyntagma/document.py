@@ -289,6 +289,9 @@ class TextAnchorList(Generic[T]):
     def __len__(self) -> int:
         return len(self.items)
 
+    def __hash__(self) -> int:
+        return hash(tuple(self.items))
+
     @overload
     def __getitem__(self, index: int) -> T: ...
     @overload
