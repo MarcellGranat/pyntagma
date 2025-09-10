@@ -1,5 +1,6 @@
 """Pyntagma: PDF document processing package."""
 
+from .agent import DocumentAgent, OllamaChatModel
 from .document import Char, Chars, Document, Line, Lines, Page, Word, Words
 from .pdf_reader import Crop, silent_pdfplumber
 from .position import (

@@ -12,7 +12,7 @@ from pydantic_ai import Agent, NativeOutput
 from pydantic_ai.models.openai import OpenAIChatModel
 from pydantic_ai.providers.ollama import OllamaProvider
 
-from .position import PdfAnchor, Position, get_binary_content, get_position
+from .position import PdfAnchor, Position, get_binary_content
 
 # Convenience factory for creating Ollama-backed chat models with defaults.
 OllamaChatModel = partial(
@@ -77,6 +77,16 @@ class DocumentAgent(BaseModel):
                 **kwargs,
             )
         raise Exception("Agent is not created!")
+
+    def init_chat(self, anchor: PdfAnchor | Position, output_type: Any) -> "ImageChat":
+        """Initialize a new chat session with this agent."""
+        use_output_type = output_type or self.output_type
+        return ImageChat(
+            agent=self,
+            anchor=anchor,
+            output_type=use_output_type,
+            message_history=[],
+        )
 
 
 T = TypeVar("T")
