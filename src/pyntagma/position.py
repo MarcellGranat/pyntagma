@@ -7,7 +7,7 @@ for arithmetic, comparison and visualization.
 from typing import Any, Iterable, TypeVar
 
 from pdfplumber.display import PageImage
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from pydantic_ai import BinaryContent
 
 from .pdf_reader import Crop
@@ -282,7 +282,7 @@ class Position(BaseModel):
         if self.vertical.top.page_number == self.vertical.bottom.page_number:
             return Crop(
                 path=self.vertical.top.page.path,
-                page_number=self.vertical.top.page_number,
+                file_page_number=self.vertical.top.page.file_page_number,
                 x0=self.x0.value,
                 x1=self.x1.value,
                 top=self.top.value,

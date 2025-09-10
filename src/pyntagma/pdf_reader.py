@@ -45,7 +45,7 @@ class Crop(BaseModel):
     """Represents a rectangular crop on a PDF page and utilities to render it."""
 
     path: Path
-    page_number: int
+    file_page_number: int
     x0: float
     x1: float
     top: float
@@ -61,7 +61,7 @@ class Crop(BaseModel):
 
     def __hash__(self):
         return hash(
-            (self.path, self.page_number, self.x0, self.x1, self.top, self.bottom)
+            (self.path, self.file_page_number, self.x0, self.x1, self.top, self.bottom)
         )
 
     @property
@@ -69,11 +69,13 @@ class Crop(BaseModel):
         """Return the PIL image for this crop (respects padding/resolution)."""
         with silent_pdfplumber(self.path) as pdf:
             x0 = max(self.x0 - self.padding, 0)
-            x1 = min(self.x1 + self.padding, pdf.pages[self.page_number].width)
+            x1 = min(self.x1 + self.padding, pdf.pages[self.file_page_number].width)
             top = max(self.top - self.padding, 0)
-            bottom = min(self.bottom + self.padding, pdf.pages[self.page_number].height)
+            bottom = min(
+                self.bottom + self.padding, pdf.pages[self.file_page_number].height
+            )
 
-            page = pdf.pages[self.page_number]
+            page = pdf.pages[self.file_page_number]
             cropped = page.within_bbox((x0, top, x1, bottom))
             return cropped.to_image(resolution=self.resolution).original
 
