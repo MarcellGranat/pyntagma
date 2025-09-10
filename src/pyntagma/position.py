@@ -329,9 +329,17 @@ def get_position(item: Any) -> Position:
     elif hasattr(item, "position"):
         return item.position
     else:
-        raise ValueError(
+        raise TypeError(
             f"Item {item} does not have a position or is not a Position instance."
         )
+
+
+def get_binary_content(item: Any) -> BinaryContent:
+    """Return the BinaryContent of an item or raise if unavailable."""
+    if hasattr(item, "binary_content"):
+        return item.binary_content
+    else:
+        raise TypeError(f"Item {item} does not have binary_content attribute.")
 
 
 def position_union(items: Iterable) -> Position:
@@ -343,6 +351,16 @@ def position_union(items: Iterable) -> Position:
     max_bottom = max(p.vertical.bottom for p in positions)
 
     return Position(x0=min_x0, x1=max_x1, top=min_top, bottom=max_bottom)
+
+
+@property
+def binary_content(self) -> BinaryContent:
+    """
+    Binary content of this position's crop for multimodal prompts.
+
+    Uses the cropped PNG bytes of the position.
+    """
+    return self.crop.binary_content
 
 
 class PdfAnchor(BaseModel, frozen=True):
@@ -405,7 +423,7 @@ class PdfAnchor(BaseModel, frozen=True):
         """
         # BinaryContent typically accepts raw bytes and infers or carries a mime type.
         # Provide PNG bytes from our crop to make it model-friendly.
-        return BinaryContent(self.position.crop.bytes, media_type="image/png")
+        return self.position.crop.binary_content
 
 
 X = TypeVar("X")
