@@ -318,6 +318,15 @@ class Position(BaseModel):
             and self.bottom >= other.bottom
         )
 
+    @property
+    def binary_content(self) -> BinaryContent:
+        """
+        Binary content of this position's crop for multimodal prompts.
+
+        Uses the cropped PNG bytes of the position.
+        """
+        return self.crop.binary_content
+
     def __str__(self):
         return f"Position: ({self.x0}, {self.x1}, {self.top}, {self.bottom})"
 
@@ -336,10 +345,8 @@ def get_position(item: Any) -> Position:
 
 def get_binary_content(item: Any) -> BinaryContent:
     """Return the BinaryContent of an item or raise if unavailable."""
-    if hasattr(item, "binary_content"):
-        return item.binary_content
-    else:
-        raise TypeError(f"Item {item} does not have binary_content attribute.")
+    pos = get_position(item)
+    return pos.binary_content
 
 
 def position_union(items: Iterable["PdfAnchor"] | Iterable[Position]) -> Position:
