@@ -5,7 +5,7 @@ optionally attaching cropped image bytes to prompts for multimodal models.
 """
 
 from functools import partial
-from typing import Any, TypeVar
+from typing import Any, Generic, Type, TypeVar
 
 from pydantic import BaseModel, Field, PrivateAttr
 from pydantic_ai import Agent, NativeOutput
@@ -80,29 +80,38 @@ class DocumentAgent(BaseModel):
 
 
 T = TypeVar("T")
+U = TypeVar("U")
 
 
-class ImageChat(BaseModel):
-    """A chat message with an optional image attachment."""
+class ImageChat(BaseModel, Generic[T]):
+    """A chat session bound to an anchor with a statically-typed output.
 
-    agent: DocumentAgent
+    Using generics allows Pydantic (and type checkers) to know the type of
+    `output` at class level: `ImageChat[MyModel]`.
+    """
+
+    agent: "DocumentAgent"
     anchor: PdfAnchor | Position
-    output_type: Any = Field(
-        default=str,
-        description="The expected output type from the agent (by BaseModel).",
+    output_type: Type[T] = Field(
+        description="The expected output type from the agent (BaseModel or builtin).",
     )
     message_history: list = Field(
         default_factory=list, description="The message history of the chat."
     )
-    output: Any = Field(default=None, description="The latest output from the agent.")
+    output: T | None = Field(
+        default=None, description="The latest output from the agent."
+    )
 
     def prompt(
         self,
         user_prompt: str,
-        output_type: T = None,
         include_anchor: bool | None = None,
     ) -> T:
-        """Send a message to the agent, updating message history and output."""
+        """Send a message to the agent, updating message history and output.
+
+        The output is parsed to the instance's `output_type` and stored in
+        `self.output`.
+        """
         if include_anchor is None:
             include_anchor = len(self.message_history) == 0
 
@@ -110,7 +119,7 @@ class ImageChat(BaseModel):
             binary_content = get_binary_content(self.anchor)
             user_prompt = [user_prompt, binary_content]  # type: ignore
 
-        use_output_type = output_type or self.output_type
+        use_output_type: Type[T] = self.output_type
 
         agent_answer = self.agent.run_sync(
             user_prompt=user_prompt,
@@ -119,9 +128,49 @@ class ImageChat(BaseModel):
         )
 
         self.message_history = agent_answer.all_messages()
-        if issubclass(use_output_type, BaseModel):  # type: ignore
-            self.output = use_output_type.model_validate(agent_answer.output)
+        if isinstance(use_output_type, type) and issubclass(use_output_type, BaseModel):
+            self.output = use_output_type.model_validate(agent_answer.output)  # type: ignore[assignment]
         else:
-            self.output = agent_answer.output
+            # For non-BaseModel outputs like `str` or `int`
+            self.output = agent_answer.output  # type: ignore[assignment]
 
-        return self.output
+        return self.output  # type: ignore[return-value]
+
+    def prompt_as(
+        self, user_prompt: str, output_type: Type[U], include_anchor: bool | None = None
+    ) -> U:
+        """Run a single prompt and return a value parsed as `output_type`.
+
+        Does not change this instance's declared `output_type` or `output` type.
+        Useful when you want a different output type temporarily.
+        """
+        if include_anchor is None:
+            include_anchor = len(self.message_history) == 0
+
+        if include_anchor:
+            binary_content = get_binary_content(self.anchor)
+            user_prompt = [user_prompt, binary_content]  # type: ignore
+
+        agent_answer = self.agent.run_sync(
+            user_prompt=user_prompt,
+            message_history=self.message_history,
+            output_type=output_type,
+        )
+
+        self.message_history = agent_answer.all_messages()
+        if isinstance(output_type, type) and issubclass(output_type, BaseModel):
+            return output_type.model_validate(agent_answer.output)
+        return agent_answer.output  # type: ignore[return-value]
+
+    def change_type(self, output_type: Type[U]) -> "ImageChat[U]":
+        """Return a new `ImageChat` instance sharing history but with new type.
+
+        This pattern keeps `output` statically typed for Pydantic and type
+        checkers while allowing type changes across turns.
+        """
+        return ImageChat[U](
+            agent=self.agent,
+            anchor=self.anchor,
+            output_type=output_type,
+            message_history=self.message_history,
+        )

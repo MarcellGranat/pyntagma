@@ -165,7 +165,23 @@ def test_chat():
     class Letters(BaseModel):
         n: int = Field(description="The number of letters in the word")
 
-    chat.prompt("How many letters does it contain?", output_type=Letters)
+    result = chat.prompt_as("How many letters does it contain?", output_type=Letters)
 
-    assert isinstance(chat.output.n, int)
-    assert 6 < chat.output.n < 10
+    assert isinstance(result.n, int)
+    assert 6 < result.n < 10
+
+    class WordMeta(BaseModel):
+        word: str = Field(description="The word on the image")
+
+    class LetterMeta(BaseModel):
+        letter: str = Field(description="The first letter of the word")
+
+    result2 = chat.prompt_as(
+        "What is the word on the image?", output_type=WordMeta | LetterMeta
+    )
+    assert isinstance(result2.word, str)
+
+    result3 = chat.prompt_as(
+        "What is the first letter of the word?", output_type=WordMeta | LetterMeta
+    )
+    assert result3.letter == result2.word[0]
