@@ -23,6 +23,7 @@ from pydantic import BaseModel
 
 from .pdf_reader import silent_pdfplumber
 from .position import (
+    ExplicitAnchor,
     HorizontalCoordinate,
     PdfAnchor,
     Position,
@@ -241,23 +242,10 @@ def word_of_char(char: "Char") -> "Word":
     raise ValueError("No word found for the char.")
 
 
-class TextAnchor(PdfAnchor, frozen=True):
+class TextAnchor(ExplicitAnchor, frozen=True):
     """Base class for textual anchors with absolute coordinates on a page."""
 
     text: str
-    x0: float
-    x1: float
-    top: float
-    bottom: float
-
-    @property
-    def position(self) -> Position:
-        return Position(
-            x0=HorizontalCoordinate(page=self.page, value=self.x0),
-            x1=HorizontalCoordinate(page=self.page, value=self.x1),
-            top=VerticalCoordinate(page=self.page, value=self.top),
-            bottom=VerticalCoordinate(page=self.page, value=self.bottom),
-        )
 
     def __hash__(self) -> int:
         return hash(
@@ -273,6 +261,9 @@ class TextAnchor(PdfAnchor, frozen=True):
         )
 
     def __str__(self) -> str:
+        return f"{self.__class__.__name__}(text='{self.text}')"
+
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}(text='{self.text}')"
 
 

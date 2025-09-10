@@ -342,7 +342,7 @@ def get_binary_content(item: Any) -> BinaryContent:
         raise TypeError(f"Item {item} does not have binary_content attribute.")
 
 
-def position_union(items: Iterable) -> Position:
+def position_union(items: Iterable["PdfAnchor"] | Iterable[Position]) -> Position:
     """Return the minimal `Position` enclosing all items' positions."""
     positions = [get_position(item) for item in items]
     min_x0 = min(p.horizontal.x0 for p in positions)
@@ -367,8 +367,6 @@ class PdfAnchor(BaseModel, frozen=True):
     """
     A base class for anchors in a PDF document.
     """
-
-    page: Any = Field(description="A valid Page object from Pyntagma")
 
     @property
     def position(self) -> Position:
@@ -414,6 +412,9 @@ class PdfAnchor(BaseModel, frozen=True):
     def __str__(self):
         return f"PdfAnchor(page: {self.position.top.page_number})"
 
+    def __repr__(self) -> str:
+        return f"PdfAnchor(page: {self.position.top.page_number})"
+
     @property
     def binary_content(self) -> BinaryContent:
         """
@@ -424,6 +425,35 @@ class PdfAnchor(BaseModel, frozen=True):
         # BinaryContent typically accepts raw bytes and infers or carries a mime type.
         # Provide PNG bytes from our crop to make it model-friendly.
         return self.position.crop.binary_content
+
+
+class ExplicitAnchor(PdfAnchor, frozen=True):
+    page: Any
+    x0: float
+    x1: float
+    top: float
+    bottom: float
+
+    @property
+    def position(self) -> Position:
+        return Position(
+            x0=HorizontalCoordinate(page=self.page, value=self.x0),
+            x1=HorizontalCoordinate(page=self.page, value=self.x1),
+            top=VerticalCoordinate(page=self.page, value=self.top),
+            bottom=VerticalCoordinate(page=self.page, value=self.bottom),
+        )
+
+    def __hash__(self) -> int:
+        return hash(
+            (
+                self.page.path,
+                self.page.page_number,
+                self.x0,
+                self.x1,
+                self.top,
+                self.bottom,
+            )
+        )
 
 
 X = TypeVar("X")

@@ -3,6 +3,7 @@
 from .document import Char, Chars, Document, Line, Lines, Page, Word, Words
 from .pdf_reader import Crop, silent_pdfplumber
 from .position import (
+    ExplicitAnchor,
     HorizontalCoordinate,
     HorizontalPosition,
     PdfAnchor,
@@ -25,6 +26,7 @@ __all__ = [
     "VerticalPosition",
     "HorizontalPosition",
     "PdfAnchor",
+    "ExplicitAnchor",
     "get_position",
     "position_union",
     "left_position_join",
