@@ -1,8 +1,10 @@
 """Pyntagma: PDF document processing package."""
 
-from .document import Document, Line, Page, Word
+from .agent import DocumentAgent, OllamaChatModel
+from .document import Char, Chars, Document, Line, Lines, Page, Word, Words
 from .pdf_reader import Crop, silent_pdfplumber
 from .position import (
+    ExplicitAnchor,
     HorizontalCoordinate,
     HorizontalPosition,
     PdfAnchor,
@@ -16,7 +18,7 @@ from .position import (
 
 __all__ = [
     "Document",
-    "Page", 
+    "Page",
     "Word",
     "Line",
     "Position",
@@ -25,6 +27,7 @@ __all__ = [
     "VerticalPosition",
     "HorizontalPosition",
     "PdfAnchor",
+    "ExplicitAnchor",
     "get_position",
     "position_union",
     "left_position_join",

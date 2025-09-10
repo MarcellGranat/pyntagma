@@ -37,3 +37,15 @@ def test_words_of_line():
 
 def test_page():
     assert page.words[0].page == page
+
+
+def test_collections():
+    first_lines = page.lines[:3]
+    assert len(first_lines) == 3
+    first_words = first_lines.words
+    assert len(first_words.lines) == 3
+    assert first_lines[0].words.lines[0] == first_lines[0]
+    first_lines_back = first_lines.words.lines.sort(lambda x: x.vertical.top)
+    for line1, line2 in zip(first_lines, first_lines_back):
+        assert line1 == line2
+    assert first_lines_back == first_lines

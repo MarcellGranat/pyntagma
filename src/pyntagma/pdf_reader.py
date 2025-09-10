@@ -14,6 +14,7 @@ from pathlib import Path
 import pdfplumber
 from PIL.Image import Image
 from pydantic import BaseModel
+from pydantic_ai import BinaryContent
 
 
 @contextmanager
@@ -42,6 +43,7 @@ def silent_pdfplumber(path_or_fp, **kwargs):
 
 class Crop(BaseModel):
     """Represents a rectangular crop on a PDF page and utilities to render it."""
+
     path: Path
     page_number: int
     x0: float
@@ -99,3 +101,14 @@ class Crop(BaseModel):
         Get the cropped image as bytes.
         """
         return self.buffer.getvalue()
+
+    @property
+    def binary_content(self) -> "BinaryContent":
+        """
+        Binary content of this crop for multimodal prompts.
+
+        Uses the cropped PNG bytes of the anchor's position.
+        """
+        # BinaryContent typically accepts raw bytes and infers or carries a mime type.
+        # Provide PNG bytes from our crop to make it model-friendly.
+        return BinaryContent(self.bytes, media_type="image/png")

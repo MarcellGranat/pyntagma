@@ -4,7 +4,7 @@ Defines horizontal/vertical coordinates and composite positions with helpers
 for arithmetic, comparison and visualization.
 """
 
-from typing import Any, Iterable
+from typing import Any, Iterable, TypeVar
 
 from pdfplumber.display import PageImage
 from pydantic import BaseModel, Field
@@ -15,6 +15,7 @@ from .pdf_reader import Crop
 
 class VerticalCoordinate(BaseModel):
     """A vertical coordinate (y) bound to a specific page."""
+
     page: Any
     value: float
 
@@ -126,6 +127,7 @@ class VerticalCoordinate(BaseModel):
 
 class HorizontalCoordinate(BaseModel):
     """A horizontal coordinate (x) bound to a specific page."""
+
     page: Any
     value: float
 
@@ -183,6 +185,7 @@ class HorizontalCoordinate(BaseModel):
 
 class VerticalPosition(BaseModel):
     """Vertical span (top..bottom) on a page sequence."""
+
     top: VerticalCoordinate
     bottom: VerticalCoordinate
 
@@ -214,6 +217,7 @@ class VerticalPosition(BaseModel):
 
 class HorizontalPosition(BaseModel):
     """Horizontal span (x0..x1) on a page."""
+
     x0: HorizontalCoordinate
     x1: HorizontalCoordinate
 
@@ -245,6 +249,7 @@ class HorizontalPosition(BaseModel):
 
 class Position(BaseModel):
     """A rectangular region on a page, expressed by four coordinates."""
+
     x0: HorizontalCoordinate
     x1: HorizontalCoordinate
     top: VerticalCoordinate
@@ -313,6 +318,15 @@ class Position(BaseModel):
             and self.bottom >= other.bottom
         )
 
+    @property
+    def binary_content(self) -> BinaryContent:
+        """
+        Binary content of this position's crop for multimodal prompts.
+
+        Uses the cropped PNG bytes of the position.
+        """
+        return self.crop.binary_content
+
     def __str__(self):
         return f"Position: ({self.x0}, {self.x1}, {self.top}, {self.bottom})"
 
@@ -324,27 +338,42 @@ def get_position(item: Any) -> Position:
     elif hasattr(item, "position"):
         return item.position
     else:
-        raise ValueError(
+        raise TypeError(
             f"Item {item} does not have a position or is not a Position instance."
         )
 
 
-def position_union(items: Iterable) -> Position:
+def get_binary_content(item: Any) -> BinaryContent:
+    """Return the BinaryContent of an item or raise if unavailable."""
+    pos = get_position(item)
+    return pos.binary_content
+
+
+def position_union(items: Iterable["PdfAnchor"] | Iterable[Position]) -> Position:
     """Return the minimal `Position` enclosing all items' positions."""
-    min_x0 = min(get_position(item).horizontal.x0 for item in items)
-    max_x1 = max(get_position(item).horizontal.x1 for item in items)
-    min_top = min(get_position(item).vertical.top for item in items)
-    max_bottom = max(get_position(item).vertical.bottom for item in items)
+    positions = [get_position(item) for item in items]
+    min_x0 = min(p.horizontal.x0 for p in positions)
+    max_x1 = max(p.horizontal.x1 for p in positions)
+    min_top = min(p.vertical.top for p in positions)
+    max_bottom = max(p.vertical.bottom for p in positions)
 
     return Position(x0=min_x0, x1=max_x1, top=min_top, bottom=max_bottom)
 
 
-class PdfAnchor(BaseModel):
+@property
+def binary_content(self) -> BinaryContent:
+    """
+    Binary content of this position's crop for multimodal prompts.
+
+    Uses the cropped PNG bytes of the position.
+    """
+    return self.crop.binary_content
+
+
+class PdfAnchor(BaseModel, frozen=True):
     """
     A base class for anchors in a PDF document.
     """
-
-    page: Any = Field(description="A valid Page object from Pyntagma")
 
     @property
     def position(self) -> Position:
@@ -390,6 +419,9 @@ class PdfAnchor(BaseModel):
     def __str__(self):
         return f"PdfAnchor(page: {self.position.top.page_number})"
 
+    def __repr__(self) -> str:
+        return f"PdfAnchor(page: {self.position.top.page_number})"
+
     @property
     def binary_content(self) -> BinaryContent:
         """
@@ -399,34 +431,66 @@ class PdfAnchor(BaseModel):
         """
         # BinaryContent typically accepts raw bytes and infers or carries a mime type.
         # Provide PNG bytes from our crop to make it model-friendly.
-        return BinaryContent(self.position.crop.bytes, media_type="image/png")
+        return self.position.crop.binary_content
+
+
+class ExplicitAnchor(PdfAnchor, frozen=True):
+    page: Any
+    x0: float
+    x1: float
+    top: float
+    bottom: float
+
+    @property
+    def position(self) -> Position:
+        return Position(
+            x0=HorizontalCoordinate(page=self.page, value=self.x0),
+            x1=HorizontalCoordinate(page=self.page, value=self.x1),
+            top=VerticalCoordinate(page=self.page, value=self.top),
+            bottom=VerticalCoordinate(page=self.page, value=self.bottom),
+        )
+
+    def __hash__(self) -> int:
+        return hash(
+            (
+                self.page.path,
+                self.page.page_number,
+                self.x0,
+                self.x1,
+                self.top,
+                self.bottom,
+            )
+        )
+
+
+X = TypeVar("X")
+Y = TypeVar("Y")
 
 
 def left_position_join(
-    x: Iterable,
-    y: Iterable,
+    x: Iterable[X],
+    y: Iterable[Y],
     after: bool = True,
     uniquely: bool = True,
     keep_empty_x: bool = False,
     max_distance: int | None = None,
-) -> Iterable[tuple]:
+) -> Iterable[tuple[X, Y | None]]:
     """
     Bind two lists together based on their vertical positions.
     """
-    x = sorted(x, key=lambda _: _.position.vertical)
-    y = sorted(y, key=lambda _: _.position.vertical, reverse=after is False)
+    x = sorted(x, key=lambda _: get_position(_).vertical)
+    y = sorted(y, key=lambda _: get_position(_).vertical, reverse=after is False)
 
     for x_item in x:
+        x_vertical = get_position(x_item).vertical
         for y_item in y:
+            y_vertical = get_position(y_item).vertical
             if after:
                 if max_distance:
-                    if (
-                        y_item.position.vertical - x_item.position.vertical
-                        > max_distance
-                    ):
+                    if y_vertical - x_vertical > max_distance:
                         break  # laters will be even further away
 
-                if x_item.position.vertical < y_item.position.vertical:
+                if x_vertical < y_vertical:
                     if uniquely:
                         y.remove(y_item)
                     yield (x_item, y_item)
@@ -434,13 +498,10 @@ def left_position_join(
 
             else:
                 if max_distance:
-                    if (
-                        x_item.position.vertical - y_item.position.vertical
-                        > max_distance
-                    ):
+                    if x_vertical - y_vertical > max_distance:
                         break  # laters will be even further away
 
-                if x_item.position.vertical > y_item.position.vertical:
+                if x_vertical > y_vertical:
                     if uniquely:
                         y.remove(y_item)
                     yield (x_item, y_item)
