@@ -280,7 +280,7 @@ T = TypeVar("T")
 
 
 class TextAnchorList(Generic[T]):
-    def __init__(self, items: Iterable[T]):
+    def __init__(self, items: Iterable[T] = []):
         self.items: list[T] = list(items)
 
     def __iter__(self) -> Iterator[T]:
@@ -366,6 +366,18 @@ class TextAnchorList(Generic[T]):
 
     def sort(self, key: Callable[[T], Any], reverse: bool = False) -> Self:
         return self.__class__(sorted(self.items, key=key, reverse=reverse))
+
+    def filter(self, predicate: Callable[[T], bool]) -> Self:
+        return self.__class__(item for item in self.items if predicate(item))
+
+    def extend(self, other: Iterable[T]) -> None:
+        self.items.extend(other)
+
+    def append(self, item: T) -> None:
+        self.items.append(item)
+
+    def pop(self, index: int = -1) -> T:
+        return self.items.pop(index)
 
     @property
     def position(self) -> Position:
