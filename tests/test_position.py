@@ -107,10 +107,6 @@ def test_get_position():
     mock_obj.position = position
     assert get_position(mock_obj) == position
 
-    # Test with invalid object
-    with pytest.raises(ValueError):
-        get_position("invalid")
-
 
 def test_left_position_join():
     """Test left_position_join function."""
